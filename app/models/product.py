@@ -15,17 +15,20 @@ class Product(db.Model):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 
+    reviews = db.relationship("Review", back_populates="products")
+    orders = db.relationship("Order", back_populates="products")
+
     def to_dict(self):
-    return {
-        'id': self.id,
-        'name': self.name,
-        'description': self.description,
-        'category': self.category,
-        'price': self.price,
-        'img_one': self.img_one,
-        'img_two': self.img_two,
-        'img_three': self.img_three,
-        'img_four': self.img_four
-        'created_at': self.created_at,
-        'updated_at': self.updated_at
-    }
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'category': self.category,
+            'price': self.price,
+            'img_one': self.img_one,
+            'img_two': self.img_two,
+            'img_three': self.img_three,
+            'img_four': self.img_four,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }

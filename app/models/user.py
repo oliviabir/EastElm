@@ -10,6 +10,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime)
+    updated_at = db.Column(db.DateTime)
+
+    reviews = db.relationship("Review", back_populates="users")
+    orders = db.relationship("Order", back_populates="users")
 
     @property
     def password(self):
