@@ -13,6 +13,9 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
 
+    reviews = db.relationship("Review", back_populates="users")
+    orders = db.relationship("Order", back_populates="users")
+
     @property
     def password(self):
         return self.hashed_password
