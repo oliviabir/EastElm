@@ -6,13 +6,13 @@ const view = (products) => ({
 });
 
 export const viewProducts = () => async (dispatch) => {
-    const response = await fetch("/api/products");
+    const response = await fetch("/api/products")
 
     if (response.ok) {
-      const products = await response.json();
-      dispatch(view(products));
+      const products = await response.json()
+      dispatch(view(products))
     }
-};
+}
 
 const productsReducer = (state = {}, action) => {
     switch (action.type) {
