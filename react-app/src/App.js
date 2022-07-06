@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Products from './components/Products';
+import SingleProduct from './components/SingleProduct';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -47,6 +48,9 @@ function App() {
         <ProtectedRoute path='/products' exact={true} >
           <Products />
         </ProtectedRoute>
+        <Route path='/products/:id' exact={true} >
+          <SingleProduct />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

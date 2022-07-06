@@ -1,26 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { viewProducts } from "../../store/products";
 
-const Products = () => {
+const SingleProduct = () => {
+    const productIdObj = useParams()
+    const productId = productIdObj.id
+
     const dispatch = useDispatch();
 
     const products = useSelector((state) => {
         return Object.values(state.products);
     });
 
+    const product = products.find(product => product.id == productId)
+
     useEffect(() => {
         dispatch(viewProducts());
     }, [dispatch]);
 
-    return products.map((product) => (
-        <Link to={`/products/${product.id}`} key={product.id}>
-            <img src={product.img_one} alt='furniture-img' />
+    return (
+        <div>
+            <img src={product.img_one} />
             <div>{product.name}</div>
             <div>${product.price}</div>
-        </Link>
-    ))
+        </div>
+    )
 }
 
-export default Products
+export default SingleProduct
