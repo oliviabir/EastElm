@@ -9,6 +9,7 @@ const Cart = () => {
             <div>{cartItem.name}</div>
             <div>${cartItem.price}</div>
             <img src={cartItem.img_one} />
+            <button>Remove Item</button>
         </div>
     ))
 }
