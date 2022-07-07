@@ -17,13 +17,13 @@ export const viewProducts = () => async (dispatch) => {
 const productsReducer = (state = {}, action) => {
     switch (action.type) {
       case VIEW_PRODUCTS:
-        const normalizedProducts = {};
+        const normalizedProducts = {}
         action.products.products.forEach((product) => {
-          normalizedProducts[product.id] = product;
+          normalizedProducts[product.id] = product
         });
-        return { ...normalizedProducts };
+        return { ...normalizedProducts }
       default:
-        return state;
+        return state
     }
 };
 
