@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 import { viewProducts } from "../../store/products";
 
 const Products = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     const products = useSelector((state) => {
-        return Object.values(state.products);
+        return Object.values(state.products)
     });
 
     useEffect(() => {
-        dispatch(viewProducts());
-    }, [dispatch]);
+        dispatch(viewProducts())
+    }, [dispatch])
 
     return products.map((product) => (
         <Link to={`/products/${product.id}`} key={product.id}>

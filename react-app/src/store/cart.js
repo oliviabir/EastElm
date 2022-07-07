@@ -1,5 +1,6 @@
 const ADD_TO_CART = 'cart/ADD_TO_CART'
 const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART'
+const CHECKOUT_CART = 'cart/CHECKOUT_CART'
 
 const addItem = (cart) => ({
     type: ADD_TO_CART,
@@ -9,6 +10,11 @@ const addItem = (cart) => ({
 const removeItem = (cart) => ({
     type: REMOVE_FROM_CART,
     cart
+})
+
+const checkout = (newOrder) => ({
+    type: CHECKOUT_CART,
+    newOrder
 })
 
 export const addToCart = (product) => async (dispatch) => {
@@ -39,6 +45,22 @@ export const removeFromCart = (product) => async (dispatch) => {
     dispatch(removeItem(newCart))
 }
 
+export const checkoutCart = (product) => async (dispatch) => {
+    const response = await fetch('/api/orders/new', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(product),
+    });
+
+    const newOrder = await response.json();
+
+    if (newOrder) {
+      dispatch(checkout(newOrder));
+    }
+
+    return newOrder;
+}
+
 const cartReducer = (state = { cart: [] }, action) => {
     switch (action.type) {
         case ADD_TO_CART:
@@ -49,6 +71,9 @@ const cartReducer = (state = { cart: [] }, action) => {
             return {
                 cart: [...action.cart]
             }
+        case CHECKOUT_CART:
+            const addState = { ...state, [action.newOrder.id]: action.newOrder };
+            return addState;
         default:
             return state
     }

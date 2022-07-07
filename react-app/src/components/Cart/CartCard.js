@@ -1,48 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../../store/cart";
 import { checkoutCart } from "../../store/cart";
-import CartCard from "./CartCard";
 
-const Cart = () => {
-    // const dispatch = useDispatch()
+const CartCard = () => {
+    const dispatch = useDispatch()
+    const { cart } = useSelector(state => state.cart)
+
     // const sessionUser = useSelector((state) => state.session.user);
-    // const { cart } = useSelector(state => state.cart)
 
+    // const [productId, setProductId] = useState(1)
     // const [numOfProduct, setNumOfProduct] = useState(1)
     // const [instructions, setInstructions] = useState('')
 
+
     // const handleSubmit = async (e) => {
-    //     e.preventDefault()
-    //     let user_id
-    //     let product_id
-    //     let payload
+    //     e.preventDefault();
 
-    //     cart.map((cartItem) => {
-    //         // e.preventDefault()
-    //         console.log('HANDLE SUBMIT HIT')
+    //     const payload = {
+    //       user_id: sessionUser.id,
+    //       productId,
+    //       numOfProduct,
+    //       instructions
+    //     };
 
-    //         user_id = sessionUser.id
-    //         product_id = cartItem.id
-
-    //         payload = (
-    //             user_id,
-    //             product_id,
-    //             numOfProduct,
-    //             instructions
-    //         )
-    //     })
-    //     console.log('PAYLOAD', product_id)
     //     let createdOrder = await dispatch(checkoutCart(payload))
-    //     if (createdOrder) {
-    //         console.log('ORDER WAS CREATED')
-    //     }
-    // }
+        // let createdOrder;
 
-    return (
-        <div>
-            <h1>Shopping Cart</h1>
-            <CartCard />
+        // try {
+        //   createdBill = await dispatch(addBill(payload));
+        // } catch (error) {
+        //   if (error instanceof ValidationError) setErrors(errors.error);
+        //   else setErrors(error.toString().slice(7));
+        // }
+
+    //     if (createdOrder) {
+    //       console.log('ORDER CREATED: ', createdOrder);
+    //     }
+    //   };
+
+    return cart.map((cartItem) => (
+        <div key={cartItem.id}>
+            <div>{cartItem.name}</div>
+            <div>${cartItem.price}</div>
+            <img src={cartItem.img_one} />
+            <button onClick={() => dispatch(removeFromCart(cartItem))}>Remove Item</button>
             {/* <form onSubmit={handleSubmit}>
+                {setProductId(cartItem.id)}
                 <input
                     name='num_of_product'
                     type='integer'
@@ -62,7 +66,7 @@ const Cart = () => {
                 <button type='submit'>Checkout</button>
             </form> */}
         </div>
-    )
+    ))
 }
 
-export default Cart
+export default CartCard
