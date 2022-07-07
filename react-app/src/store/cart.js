@@ -26,12 +26,26 @@ export const addToCart = (product) => async (dispatch) => {
 }
 
 export const removeFromCart = (product) => async (dispatch) => {
+    let cart = []
 
+    if (localStorage.getItem('cart')) {
+        cart = JSON.parse(localStorage.getItem('cart'))
+    } else {
+        cart = []
+    }
+
+    const newCart = cart.filter(cartItem => cartItem.id !== product.id)
+    localStorage.setItem('cart', JSON.stringify(newCart))
+    dispatch(removeItem(newCart))
 }
 
 const cartReducer = (state = { cart: [] }, action) => {
     switch (action.type) {
         case ADD_TO_CART:
+            return {
+                cart: [...action.cart]
+            }
+        case REMOVE_FROM_CART:
             return {
                 cart: [...action.cart]
             }
