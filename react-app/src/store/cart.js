@@ -1,8 +1,14 @@
 const ADD_TO_CART = 'cart/ADD_TO_CART'
+const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART'
 
 const addItem = (cart) => ({
     type: ADD_TO_CART,
     cart,
+})
+
+const removeItem = (cart) => ({
+    type: REMOVE_FROM_CART,
+    cart
 })
 
 export const addToCart = (product) => async (dispatch) => {
@@ -17,6 +23,10 @@ export const addToCart = (product) => async (dispatch) => {
     cart.push(product)
     localStorage.setItem('cart', JSON.stringify(cart))
     dispatch(addItem(cart))
+}
+
+export const removeFromCart = (product) => async (dispatch) => {
+
 }
 
 const cartReducer = (state = { cart: [] }, action) => {
