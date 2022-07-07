@@ -1,39 +1,66 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkoutCart } from "../../store/cart";
 import CartCard from "./CartCard";
 
 const Cart = () => {
-    const dispatch = useDispatch()
-    const sessionUser = useSelector((state) => state.session.user);
-    const { cart } = useSelector(state => state.cart)
-    console.log('CART - INDEX.JS', cart)
-    console.log('SESSION USER', sessionUser)
+    // const dispatch = useDispatch()
+    // const sessionUser = useSelector((state) => state.session.user);
+    // const { cart } = useSelector(state => state.cart)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    // const [numOfProduct, setNumOfProduct] = useState(1)
+    // const [instructions, setInstructions] = useState('')
 
-        let user_id
-        let product_id
-        let num_of_products
-        let instructions
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault()
+    //     let user_id
+    //     let product_id
+    //     let payload
 
-        cart.map((cartItem) => {
-            const payload = (
-                user_id = sessionUser.id,
-                product_id = cartItem.id,
-                num_of_products = 1,
-                instructions = ''
-            )
-            dispatch(checkoutCart(payload))
-        })
-    }
+    //     cart.map((cartItem) => {
+    //         // e.preventDefault()
+    //         console.log('HANDLE SUBMIT HIT')
+
+    //         user_id = sessionUser.id
+    //         product_id = cartItem.id
+
+    //         payload = (
+    //             user_id,
+    //             product_id,
+    //             numOfProduct,
+    //             instructions
+    //         )
+    //     })
+    //     console.log('PAYLOAD', product_id)
+    //     let createdOrder = await dispatch(checkoutCart(payload))
+    //     if (createdOrder) {
+    //         console.log('ORDER WAS CREATED')
+    //     }
+    // }
 
     return (
         <div>
             <h1>Shopping Cart</h1>
             <CartCard />
-            <button onClick={handleSubmit}>Checkout</button>
+            {/* <form onSubmit={handleSubmit}>
+                <input
+                    name='num_of_product'
+                    type='integer'
+                    value={numOfProduct}
+                    onChange={(e) => setNumOfProduct(e.target.value)}
+                    placeholder={'Number of products'}
+                    // style={{ display: 'none' }}
+                />
+                <input
+                    name='instructions'
+                    type='text'
+                    value={instructions}
+                    onChange={(e) => setInstructions(e.target.value)}
+                    placeholder={'Instructions'}
+                    // style={{ display: 'none' }}
+                />
+                <button type='submit'>Checkout</button>
+            </form> */}
         </div>
     )
 }
