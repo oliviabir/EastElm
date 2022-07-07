@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../../store/cart";
 
 const Cart = () => {
+    const dispatch = useDispatch()
     const { cart } = useSelector(state => state.cart)
 
     return cart.map((cartItem) => (
@@ -9,7 +11,7 @@ const Cart = () => {
             <div>{cartItem.name}</div>
             <div>${cartItem.price}</div>
             <img src={cartItem.img_one} />
-            <button>Remove Item</button>
+            <button onClick={() => dispatch(removeFromCart(cartItem))}>Remove Item</button>
         </div>
     ))
 }
