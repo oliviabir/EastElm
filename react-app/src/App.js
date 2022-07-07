@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
+import Cart from './components/Cart';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,6 +51,9 @@ function App() {
         </Route>
         <Route path='/products/:id' exact={true} >
           <SingleProduct />
+        </Route>
+        <Route path='/cart' exact={true} >
+          <Cart />
         </Route>
       </Switch>
     </BrowserRouter>
