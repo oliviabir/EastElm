@@ -1,5 +1,6 @@
 const VIEW_REVIEWS = 'reviews/VIEW_REVIEWS'
 const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW'
+const ADD_REVIEW = 'reviews/ADD_REVIEW'
 
 const view = (reviews) => ({
     type: VIEW_REVIEWS,
@@ -9,6 +10,11 @@ const view = (reviews) => ({
 const remove = (review) => ({
     type: REMOVE_REVIEW,
     review
+})
+
+const add = (newReview) => ({
+    type: ADD_REVIEW,
+    newReview
 })
 
 export const viewReviews = () => async (dispatch) => {
@@ -31,6 +37,20 @@ export const removeReview = (id) => async (dispatch) => {
     }
 }
 
+export const addReview = (payload) => async (dispatch) => {
+    const response = await fetch("/api/reviews/new", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+    })
+    const newReview = await response.json()
+
+    if (newReview) {
+        dispatch(add(newReview))
+    }
+    return newReview
+}
+
 const reviewsReducer = (state = {}, action) => {
     switch(action.type) {
         case VIEW_REVIEWS:
@@ -43,6 +63,9 @@ const reviewsReducer = (state = {}, action) => {
             const deleteState = {...state}
             delete deleteState[action.review]
             return deleteState
+        case ADD_REVIEW:
+            const addState = { ...state, [action.newReview.id]: action.newReview }
+            return addState
         default:
             return state
     }

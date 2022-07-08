@@ -20,6 +20,7 @@ const Reviews = ({ id }) => {
     return (
         <div>
             <h2>Reviews</h2>
+            <button>Leave a Review</button>
             {reviews.map((review) => (
                 <div key={review.id}>
                     <div>{review.body}</div>
