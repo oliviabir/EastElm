@@ -26,7 +26,6 @@ def create_order():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         data = form.data
-        print("*******DATA: ", data)
         new_order = Order(user_id=data['user_id'],
                           product_id=data['product_id'],
                           num_of_product=data['num_of_product'],
@@ -37,3 +36,11 @@ def create_order():
         db.session.commit()
         return new_order.to_dict()
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@order_routes.route('/<int:id>', methods=['DELETE'])
+def delete_order(id):
+    order = Order.query.get(id)
+    db.session.delete(order)
+    db.session.commit()
+
+    return "Order was successfully deleted."
