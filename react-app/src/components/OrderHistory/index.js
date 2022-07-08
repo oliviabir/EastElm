@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { viewOrders, removeOrder } from "../../store/orders"
 import ItemInfo from "./ItemInfo"
@@ -6,13 +6,15 @@ import ItemInfo from "./ItemInfo"
 const OrderHistory = () => {
     const dispatch = useDispatch()
 
+    const [orderCanceled, setOrderCanceled] = useState(false)
+
     const orders = useSelector((state) => {
         return Object.values(state.orders)
     })
 
     useEffect(() => {
         dispatch(viewOrders())
-    }, [dispatch])
+    }, [dispatch, orderCanceled])
 
     let orderArr = []
     console.log('ORDER ARRAY', orderArr)
@@ -28,6 +30,8 @@ const OrderHistory = () => {
 
         if (orderArr.length > 0) {
             handleCancel()
+        } else {
+            setOrderCanceled(true)
         }
     }
 
