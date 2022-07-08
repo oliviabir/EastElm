@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { viewOrders, removeOrder } from "../../store/orders"
 import ItemInfo from "./ItemInfo"
+import EditOrder from "../EditOrder"
 
 const OrderHistory = () => {
     const dispatch = useDispatch()
@@ -43,6 +44,7 @@ const OrderHistory = () => {
                     <button>Edit Quantity</button>
                     <div>Instructions: {order.instructions}</div>
                     <button>Edit Instructions</button>
+                    <EditOrder order={order}/>
                     {pushOrders(order.id)}
                     <br />
                 </div>
