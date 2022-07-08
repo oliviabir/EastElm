@@ -35,12 +35,12 @@ const Cart = () => {
         // let product_id = 1
 
         console.log('PRODUCT ID', product_id)
-        const payload = (
+        const payload = {
             user_id,
             product_id,
             numOfProduct,
             instructions
-        )
+        }
 
         console.log('PAYLOAD', payload)
         let createdOrder = await dispatch(checkoutCart(payload))
