@@ -10,6 +10,8 @@ const Cart = () => {
 
     const [numOfProduct, setNumOfProduct] = useState(1)
     const [instructions, setInstructions] = useState('')
+    const [checkoutComplete, setCheckoutComplete] = useState(false)
+
     console.log('NUM OF PRODUCTS', numOfProduct)
     console.log('INSTRUCTIONS', instructions)
 
@@ -19,16 +21,18 @@ const Cart = () => {
         orderArr.push(orderInfo)
     }
 
-    const handleCheckout = async (e) => {
-        e.preventDefault()
+    const handleCheckout = async () => {
+        // e.preventDefault()
 
-        orderArr.push(numOfProduct)
-        orderArr.push(instructions)
+        // orderArr.push(numOfProduct)
+        // orderArr.push(instructions)
 
         console.log('ORDER ARRAY IN CHECKOUT', orderArr)
 
+        const product_id = orderArr.pop()
+
         const user_id = sessionUser.id
-        let product_id = 1
+        // let product_id = 1
 
         console.log('PRODUCT ID', product_id)
         const payload = (
@@ -39,10 +43,13 @@ const Cart = () => {
         )
 
         console.log('PAYLOAD', payload)
-        // let createdOrder = await dispatch(checkoutCart(payload))
-        // if (createdOrder) {
-        //     console.log('ORDER WAS CREATED')
-        // }
+        let createdOrder = await dispatch(checkoutCart(payload))
+        if (orderArr.length > 0) {
+            handleCheckout()
+        } else {
+            setCheckoutComplete(true)
+            console.log('ORDER WAS CREATED')
+        }
     }
 
     return (

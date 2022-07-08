@@ -1,10 +1,12 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { viewReviews } from "../../store/reviews"
+import DeleteReview from "../DeleteReview"
 
 const Reviews = ({ id }) => {
     const dispatch = useDispatch()
 
+    const sessionUser = useSelector(state => state.session.user)
     const reviewsState = useSelector((state) => {
         return Object.values(state.reviews)
     })
@@ -21,6 +23,12 @@ const Reviews = ({ id }) => {
             {reviews.map((review) => (
                 <div key={review.id}>
                     <div>{review.body}</div>
+                    {(sessionUser.id == review.user_id) ? (
+                        <div>
+                            <DeleteReview review={review} productId={id}/>
+                        </div>
+                    ) : null }
+                    <br />
                 </div>
             ))}
         </div>
