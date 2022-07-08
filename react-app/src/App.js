@@ -12,6 +12,7 @@ import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory'
+import Reviews from './components/Reviews';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -58,6 +59,9 @@ function App() {
         </Route>
         <Route path='/orders' exact={true} >
           <OrderHistory />
+        </Route>
+        <Route path='/reviews' exact={true} >
+          <Reviews />
         </Route>
       </Switch>
     </BrowserRouter>

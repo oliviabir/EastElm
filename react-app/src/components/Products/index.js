@@ -8,7 +8,7 @@ const Products = () => {
 
     const products = useSelector((state) => {
         return Object.values(state.products)
-    });
+    })
 
     useEffect(() => {
         dispatch(viewProducts())
