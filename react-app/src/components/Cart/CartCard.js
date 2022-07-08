@@ -39,34 +39,38 @@ const CartCard = () => {
     //     }
     //   };
 
-    return cart.map((cartItem) => (
-        <div key={cartItem.id}>
-            <div>{cartItem.name}</div>
-            <div>${cartItem.price}</div>
-            <img src={cartItem.img_one} />
-            <button onClick={() => dispatch(removeFromCart(cartItem))}>Remove Item</button>
-            {/* <form onSubmit={handleSubmit}>
-                {setProductId(cartItem.id)}
-                <input
-                    name='num_of_product'
-                    type='integer'
-                    value={numOfProduct}
-                    onChange={(e) => setNumOfProduct(e.target.value)}
-                    placeholder={'Number of products'}
-                    // style={{ display: 'none' }}
-                />
-                <input
-                    name='instructions'
-                    type='text'
-                    value={instructions}
-                    onChange={(e) => setInstructions(e.target.value)}
-                    placeholder={'Instructions'}
-                    // style={{ display: 'none' }}
-                />
-                <button type='submit'>Checkout</button>
-            </form> */}
+    return (
+        <div>
+            {cart.map((cartItem) => (
+                <div key={cartItem.id}>
+                    <div>{cartItem.name}</div>
+                    <div>${cartItem.price}</div>
+                    <img src={cartItem.img_one} />
+                    <button onClick={() => dispatch(removeFromCart(cartItem))}>Remove Item</button>
+                    {/* <form onSubmit={handleSubmit}>
+                        {setProductId(cartItem.id)}
+                        <input
+                            name='num_of_product'
+                            type='integer'
+                            value={numOfProduct}
+                            onChange={(e) => setNumOfProduct(e.target.value)}
+                            placeholder={'Number of products'}
+                            // style={{ display: 'none' }}
+                        />
+                        <input
+                            name='instructions'
+                            type='text'
+                            value={instructions}
+                            onChange={(e) => setInstructions(e.target.value)}
+                            placeholder={'Instructions'}
+                            // style={{ display: 'none' }}
+                        />
+                        <button type='submit'>Checkout</button>
+                    </form> */}
+                </div>
+            ))}
         </div>
-    ))
+    )
 }
 
 export default CartCard
