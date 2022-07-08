@@ -17,3 +17,10 @@ def validation_errors_to_error_messages(validation_errors):
 def reviews():
     reviews = Review.query.all()
     return {'reviews': [review.to_dict() for review in reviews]}
+
+@review_routes.route('/<int:id>', methods=['DELETE'])
+def delete_review(id):
+    review = Review.query.get(id)
+    db.session.delete(review)
+    db.session.commit()
+    return "Review was successfully deleted"
