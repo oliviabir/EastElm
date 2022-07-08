@@ -1,9 +1,18 @@
 
 import React from 'react';
+import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import { login } from '../store/session';
 
 const NavBar = () => {
+  const dispatch = useDispatch()
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    await dispatch(login('demo@aa.io', 'password'));
+  };
+
   return (
     <nav>
       <ul>
@@ -21,6 +30,9 @@ const NavBar = () => {
           <NavLink to='/sign-up' exact={true} activeClassName='active'>
             Sign Up
           </NavLink>
+        </li>
+        <li>
+          <button onClick={demoLogin}>Demo Login</button>
         </li>
         <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
