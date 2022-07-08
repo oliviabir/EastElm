@@ -46,17 +46,18 @@ export const removeFromCart = (product) => async (dispatch) => {
 }
 
 export const checkoutCart = (product) => async (dispatch) => {
-    console.log('INSIDE CHECKOUT CART THUNK')
     const response = await fetch('/api/orders/new', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(product),
     });
-    console.log('POST REQUEST RESPONSE')
+
     const newOrder = await response.json();
 
     if (newOrder) {
       dispatch(checkout(newOrder));
+    //   const cart = []
+    //   localStorage.setItem('cart', [])
     }
 
     return newOrder;

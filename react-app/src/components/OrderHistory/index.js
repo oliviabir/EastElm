@@ -17,7 +17,6 @@ const OrderHistory = () => {
     }, [dispatch, orderCanceled])
 
     let orderArr = []
-    console.log('ORDER ARRAY', orderArr)
 
     const pushOrders = (id) => {
         orderArr.push(id)

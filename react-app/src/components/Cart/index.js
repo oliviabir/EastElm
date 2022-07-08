@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkoutCart, removeFromCart } from "../../store/cart";
-import CartCard from "./CartCard";
 
 const Cart = () => {
     const dispatch = useDispatch()
@@ -12,9 +11,6 @@ const Cart = () => {
     const [instructions, setInstructions] = useState('')
     const [checkoutComplete, setCheckoutComplete] = useState(false)
 
-    console.log('NUM OF PRODUCTS', numOfProduct)
-    console.log('INSTRUCTIONS', instructions)
-
     let orderArr = []
 
     const pushOrders = (orderInfo) => {
@@ -22,19 +18,10 @@ const Cart = () => {
     }
 
     const handleCheckout = async () => {
-        // e.preventDefault()
-
-        // orderArr.push(numOfProduct)
-        // orderArr.push(instructions)
-
-        console.log('ORDER ARRAY IN CHECKOUT', orderArr)
-
         const product_id = orderArr.pop()
 
         const user_id = sessionUser.id
-        // let product_id = 1
 
-        console.log('PRODUCT ID', product_id)
         const payload = {
             user_id,
             product_id,
@@ -42,13 +29,11 @@ const Cart = () => {
             instructions
         }
 
-        console.log('PAYLOAD', payload)
         let createdOrder = await dispatch(checkoutCart(payload))
         if (orderArr.length > 0) {
             handleCheckout()
         } else {
             setCheckoutComplete(true)
-            console.log('ORDER WAS CREATED')
         }
     }
 
@@ -65,11 +50,10 @@ const Cart = () => {
                     <form>
                         <input
                             name='num_of_product'
-                            type='integer'
+                            type='number'
                             value={numOfProduct}
                             onChange={(e) => setNumOfProduct(e.target.value)}
                             placeholder={'Number of products'}
-                            // style={{ display: 'none' }}
                         />
                         <input
                             name='instructions'
@@ -77,7 +61,6 @@ const Cart = () => {
                             value={instructions}
                             onChange={(e) => setInstructions(e.target.value)}
                             placeholder={'Instructions'}
-                            // style={{ display: 'none' }}
                         />
                     </form>
                 </div>
