@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from app.models import db, Order
-from app.forms import OrderForm
+from app.forms import OrderForm, EditOrderForm
 from datetime import datetime
 
 order_routes = Blueprint('orders', __name__)
@@ -44,3 +44,17 @@ def delete_order(id):
     db.session.commit()
 
     return "Order was successfully deleted."
+
+@order_routes.route('/<int:id>', methods=['PUT'])
+def edit_order(id):
+    order = Order.query.get(id)
+    form = EditOrderForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        data = form.data
+        order.num_of_product = data['num_of_product']
+        order.instructions = data['instructions']
+        order.updated_at = datetime.now()
+        db.session.commit()
+        return order.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

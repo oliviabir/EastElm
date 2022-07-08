@@ -25,7 +25,7 @@ const Cart = () => {
         const payload = {
             user_id,
             product_id,
-            numOfProduct,
+            num_of_product: numOfProduct,
             instructions
         }
 

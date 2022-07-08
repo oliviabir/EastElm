@@ -1,5 +1,6 @@
 const VIEW_ORDERS = 'orders/VIEW_ORDERS'
 const REMOVE_ORDER = 'orders/REMOVE_ORDER'
+const EDIT_ORDER = 'orders/EDIT_ORDER'
 
 const view = (orders) => ({
     type: VIEW_ORDERS,
@@ -9,6 +10,11 @@ const view = (orders) => ({
 const remove = (order) => ({
     type: REMOVE_ORDER,
     order,
+})
+
+const edit = (order) => ({
+    type: EDIT_ORDER,
+    order
 })
 
 export const viewOrders = () => async (dispatch) => {
@@ -32,6 +38,20 @@ export const removeOrder = (id) => async (dispatch) => {
     return response;
 }
 
+export const editOrder = (payload, id) => async (dispatch) => {
+    const response = await fetch(`/api/orders/${id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+        const order = await response.json()
+        dispatch(edit(order))
+        return order
+    }
+}
+
 const ordersReducer = (state = {}, action) => {
     switch (action.type) {
         case VIEW_ORDERS:
@@ -42,7 +62,16 @@ const ordersReducer = (state = {}, action) => {
             return {...normalizedOrders}
         case REMOVE_ORDER:
             const deleteState = { ...state }
-            return deleteState;
+            return deleteState
+        case EDIT_ORDER:
+            const updatedState = {
+                ...state,
+                [action.order.id]: {
+                    ...state[action.order.id],
+                    ...action.order
+                }
+            }
+            return updatedState
         default:
             return state
     }
