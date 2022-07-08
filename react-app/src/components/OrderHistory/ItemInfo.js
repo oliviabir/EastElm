@@ -11,8 +11,6 @@ const ItemInfo = ({ order }) => {
 
     const itemArr = products.filter(product => product.id == order.product_id )
     const item = itemArr[0]
-    console.log('ITEM ->', item.name)
-
 
     useEffect(() => {
         dispatch(viewProducts())
@@ -20,9 +18,9 @@ const ItemInfo = ({ order }) => {
 
     return (
         <div>
-            <div>{item.name}</div>
-            <div>{item.price}</div>
-            <img src={item.img_one} alt={`${item.name}-image`} />
+            <div>{item?.name}</div>
+            <div>{item?.price}</div>
+            <img src={item?.img_one} alt={`${item?.name}-image`} />
         </div>
     )
 }
