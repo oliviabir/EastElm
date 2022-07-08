@@ -40,7 +40,9 @@ const OrderHistory = () => {
                 <div key={order.id}>
                     <ItemInfo order={order}/>
                     <div>Quantity: {order.num_of_product}</div>
+                    <button>Edit Quantity</button>
                     <div>Instructions: {order.instructions}</div>
+                    <button>Edit Instructions</button>
                     {pushOrders(order.id)}
                     <br />
                 </div>

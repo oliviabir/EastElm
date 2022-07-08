@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { viewReviews } from "../../store/reviews"
 import DeleteReview from "../DeleteReview"
+import EditReviewForm from "../EditReview"
 
 const Reviews = ({ id }) => {
     const dispatch = useDispatch()
@@ -26,6 +27,7 @@ const Reviews = ({ id }) => {
                     <div>{review.body}</div>
                     {(sessionUser.id == review.user_id) ? (
                         <div>
+                            <EditReviewForm review={ review } />
                             <DeleteReview review={review} productId={id}/>
                         </div>
                     ) : null }

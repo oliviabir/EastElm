@@ -1,6 +1,7 @@
 const VIEW_REVIEWS = 'reviews/VIEW_REVIEWS'
 const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW'
 const ADD_REVIEW = 'reviews/ADD_REVIEW'
+const EDIT_REVIEW = 'reviews/EDIT_REVIEW'
 
 const view = (reviews) => ({
     type: VIEW_REVIEWS,
@@ -15,6 +16,11 @@ const remove = (review) => ({
 const add = (newReview) => ({
     type: ADD_REVIEW,
     newReview
+})
+
+const edit = (review) => ({
+    type: EDIT_REVIEW,
+    review
 })
 
 export const viewReviews = () => async (dispatch) => {
@@ -38,9 +44,9 @@ export const removeReview = (id) => async (dispatch) => {
 }
 
 export const addReview = (payload) => async (dispatch) => {
-    const response = await fetch("/api/reviews/new", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+    const response = await fetch('/api/reviews/new', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
     })
     const newReview = await response.json()
@@ -50,6 +56,21 @@ export const addReview = (payload) => async (dispatch) => {
     }
     return newReview
 }
+
+export const editReview = (payload, id) => async (dispatch) => {
+    const response = await fetch(`/api/reviews/${id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+
+    if (response.ok) {
+        const review = await response.json()
+        dispatch(edit(review))
+        return review
+    }
+}
+
 
 const reviewsReducer = (state = {}, action) => {
     switch(action.type) {
@@ -66,6 +87,15 @@ const reviewsReducer = (state = {}, action) => {
         case ADD_REVIEW:
             const addState = { ...state, [action.newReview.id]: action.newReview }
             return addState
+        case EDIT_REVIEW:
+            const updatedState = {
+                ...state,
+                [action.review.id]: {
+                    ...state[action.review.id],
+                    ...action.review
+                }
+            }
+            return updatedState
         default:
             return state
     }

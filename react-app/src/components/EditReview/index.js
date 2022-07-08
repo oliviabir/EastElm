@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addReview } from "../../store/reviews";
+import { useDispatch } from "react-redux";
+import { editReview } from "../../store/reviews";
 
-const AddReviewForm = ({ productId }) => {
+const EditReviewForm = ({ review }) => {
     const dispatch = useDispatch()
-    const sessionUser = useSelector((state) => state.session.user)
 
-    const [rating, setRating] = useState(5)
-    const [body, setBody] = useState('')
-    const [errors, setErrors] = useState([]);
+    const [rating, setRating] = useState(review.rating)
+    const [body, setBody] = useState(review.body)
+    const [errors, setErrors] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const payload = {
-            user_id: sessionUser.id,
-            product_id: productId,
+            user_id: review.user_id,
+            product_id: review.product_id,
             rating,
             body
         }
 
-        let newReview = await dispatch(addReview(payload))
+        let editedReview = await dispatch(editReview(payload, review.id))
 
-        if (newReview) {
+        if (editedReview) {
             setErrors([])
         }
     }
@@ -36,7 +35,7 @@ const AddReviewForm = ({ productId }) => {
                     ))}
                 </ul>
                 <label>
-                Rating
+                    Rating
                     <input
                         name='rating'
                         type='number'
@@ -59,4 +58,4 @@ const AddReviewForm = ({ productId }) => {
     )
 }
 
-export default AddReviewForm
+export default EditReviewForm
