@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editReview } from "../../store/reviews";
 
-const EditReviewForm = ({ review }) => {
+const EditReviewForm = ({ review, setShowEditModal }) => {
     const dispatch = useDispatch()
 
     const [rating, setRating] = useState(review.rating)
@@ -23,6 +23,7 @@ const EditReviewForm = ({ review }) => {
 
         if (editedReview) {
             setErrors([])
+            setShowEditModal(false)
         }
     }
 

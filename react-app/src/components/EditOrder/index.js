@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { useDispatch } from "react-redux";
 import { editOrder } from "../../store/orders";
 
-const EditOrder = ({ order }) => {
+const EditOrder = ({ order, setShowModal }) => {
     const dispatch = useDispatch()
 
     const [numOfProducts, setNumOfProducts] = useState(order.num_of_products)
@@ -23,6 +23,7 @@ const EditOrder = ({ order }) => {
 
         if (editedOrder) {
             setErrors([])
+            setShowModal(false)
         }
     }
 

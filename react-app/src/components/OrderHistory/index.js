@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Modal } from '../../context/Modal';
 import { viewOrders, removeOrder } from "../../store/orders"
 import ItemInfo from "./ItemInfo"
 import EditOrder from "../EditOrder"
@@ -7,6 +8,7 @@ import EditOrder from "../EditOrder"
 const OrderHistory = () => {
     const dispatch = useDispatch()
 
+    const [showModal, setShowModal] = useState(false)
     const [orderCanceled, setOrderCanceled] = useState(false)
 
     const orders = useSelector((state) => {
@@ -41,10 +43,13 @@ const OrderHistory = () => {
                 <div key={order.id}>
                     <ItemInfo order={order}/>
                     <div>Quantity: {order.num_of_product}</div>
-                    <button>Edit Quantity</button>
                     <div>Instructions: {order.instructions}</div>
-                    <button>Edit Instructions</button>
-                    <EditOrder order={order}/>
+                    <button onClick={() => setShowModal(true)}>Edit Order Info</button>
+                    {showModal && (
+                        <Modal onClose={() => setShowModal(false)}>
+                            <EditOrder order={order} setShowModal={setShowModal} />
+                        </Modal>
+                    )}
                     {pushOrders(order.id)}
                     <br />
                 </div>

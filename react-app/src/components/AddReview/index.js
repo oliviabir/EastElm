@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../../store/reviews";
 
-const AddReviewForm = ({ productId }) => {
+const AddReviewForm = ({ productId, setShowModal }) => {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user)
 
@@ -24,6 +24,7 @@ const AddReviewForm = ({ productId }) => {
 
         if (newReview) {
             setErrors([])
+            setShowModal(false)
         }
     }
 

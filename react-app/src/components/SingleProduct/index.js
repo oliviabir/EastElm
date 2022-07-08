@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { viewProducts } from "../../store/products";
 import { addToCart } from "../../store/cart";
 import Reviews from "../Reviews";
-import AddReviewForm from "../AddReview";
 
 const SingleProduct = () => {
     const productIdObj = useParams()
@@ -31,8 +30,7 @@ const SingleProduct = () => {
             <img src={product?.img_one} />
             <div>{product?.name}</div>
             <div>${product?.price}</div>
-            <AddReviewForm productId={product?.id} />
-            <Reviews id={product?.id} />
+            <Reviews id={product?.id} product={product}/>
             <button onClick={handleAddItemToCart}>Add to Cart</button>
         </div>
     )
