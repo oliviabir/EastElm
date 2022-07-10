@@ -5,6 +5,7 @@ import { viewReviews } from "../../store/reviews"
 import AddReviewForm from "../AddReview";
 import DeleteReview from "../DeleteReview"
 import EditReviewForm from "../EditReview"
+import './Reviews.css'
 
 const Reviews = ({ id, product }) => {
     const dispatch = useDispatch()
@@ -24,9 +25,9 @@ const Reviews = ({ id, product }) => {
     }, [dispatch])
 
     return (
-        <div>
-            <h2>Reviews</h2>
-            <button onClick={() => setShowModal(true)}>Leave a Review</button>
+        <div className='reviews-container'>
+            <h2 className='reviews-heading'>Reviews</h2>
+            <button onClick={() => setShowModal(true)} className='reviews-buttons'>Leave a Review</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <AddReviewForm productId={product?.id} setShowModal={setShowModal} />
@@ -37,7 +38,7 @@ const Reviews = ({ id, product }) => {
                     <div>{review.body}</div>
                     {(sessionUser.id == review.user_id) ? (
                         <div>
-                            <button onClick={() => setShowEditModal(true)}>Edit Review</button>
+                            <button onClick={() => setShowEditModal(true)} className='reviews-buttons'>Edit Review</button>
                             {showEditModal && (
                                 <Modal onClose={() => setShowEditModal(false)}>
                                     <EditReviewForm review={ review } setShowEditModal={setShowEditModal} />

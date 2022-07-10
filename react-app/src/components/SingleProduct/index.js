@@ -34,10 +34,10 @@ const SingleProduct = () => {
                     <div className='single-product-name'>{product?.name}</div>
                     <div className='single-product-price'>${product?.price}</div>
                     <button onClick={handleAddItemToCart} className='single-product-add-button'>Add to Cart</button>
+                    <Reviews id={product?.id} product={product}/>
                 </div>
             </div>
             <div className='single-product-reviews-container'>
-                <Reviews id={product?.id} product={product}/>
             </div>
         </div>
     )
