@@ -1,0 +1,12 @@
+.single-product-container {
+    margin: 5%;
+}
+
+.single-product-info-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.single-product-right-panel {
+    grid-column-start: 2;
+}
