@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkoutCart, removeFromCart } from "../../store/cart";
+import './Cart.css'
 
 const Cart = () => {
     const dispatch = useDispatch()
@@ -39,33 +40,35 @@ const Cart = () => {
 
     return (
         <div>
-            <h1>Shopping Cart</h1>
+            <h2 className='cart-header'>Shopping Cart</h2>
             {cart.map((cartItem) => (
-                <div key={cartItem.id}>
+                <div key={cartItem.id} className='cart-card-container'>
                     {pushOrders(cartItem.id)}
-                    <div>{cartItem.name}</div>
-                    <div>${cartItem.price}</div>
-                    <img src={cartItem.img_one} />
-                    <button onClick={() => dispatch(removeFromCart(cartItem))}>Remove Item</button>
-                    <form>
-                        <input
-                            name='num_of_product'
-                            type='number'
-                            value={numOfProduct}
-                            onChange={(e) => setNumOfProduct(e.target.value)}
-                            placeholder={'Number of products'}
-                        />
-                        <input
-                            name='instructions'
-                            type='text'
-                            value={instructions}
-                            onChange={(e) => setInstructions(e.target.value)}
-                            placeholder={'Instructions'}
-                        />
-                    </form>
+                    <img src={cartItem.img_one} className='item-img'/>
+                    <div className='cart-info-container'>
+                        <div className='item-name'>{cartItem.name}</div>
+                        <div className='item-price'>${cartItem.price}</div>
+                        <form className='cart-form'>
+                            <input
+                                name='num_of_product'
+                                type='number'
+                                value={numOfProduct}
+                                onChange={(e) => setNumOfProduct(e.target.value)}
+                                placeholder={'Quantity'}
+                            />
+                            <input
+                                name='instructions'
+                                type='text'
+                                value={instructions}
+                                onChange={(e) => setInstructions(e.target.value)}
+                                placeholder={'Instructions'}
+                            />
+                        </form>
+                        <button onClick={() => dispatch(removeFromCart(cartItem))} className='remove-item-btn'>Remove Item</button>
+                    </div>
                 </div>
             ))}
-            <button onClick={handleCheckout}>Checkout</button>
+            <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button>
         </div>
     )
 }
