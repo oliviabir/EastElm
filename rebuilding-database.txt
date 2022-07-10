@@ -7,5 +7,6 @@ to rebuild a database with sqlalchemy:
 - run: flask db upgrade
 - run: flask seed all
 
+
 to only drop the data from the databse:
 - run: flask undo all
