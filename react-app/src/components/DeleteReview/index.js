@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { removeReview } from '../../store/reviews'
+import './DeleteReview.css'
 
 function DeleteReview({ review, productId }) {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ function DeleteReview({ review, productId }) {
     }
 
     return (
-        <button onClick={handleDelete}>Delete Review</button>
+        <button onClick={handleDelete} className='delete-review-btn'>Delete Review</button>
     )
 }
 
