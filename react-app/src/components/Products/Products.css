@@ -5,11 +5,6 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.product-link-container {
-    /* display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr; */
-}
-
 .product-link-image {
     height: 67%;
     max-width: 75%;
