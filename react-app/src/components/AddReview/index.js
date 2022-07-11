@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../../store/reviews";
+import './AddReview.css'
 
 const AddReviewForm = ({ productId, setShowModal }) => {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user)
 
-    const [rating, setRating] = useState(5)
+    const [rating, setRating] = useState(0)
     const [body, setBody] = useState('')
     const [errors, setErrors] = useState([]);
+
+    const ratingArr = [1, 2, 3, 4, 5]
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -38,12 +41,22 @@ const AddReviewForm = ({ productId, setShowModal }) => {
                 </ul>
                 <label>
                 Rating
-                    <input
-                        name='rating'
-                        type='number'
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                    />
+                    <div>
+                        {ratingArr.map((index) => {
+                            index += 1
+                            return (
+                                <button
+                                    type='button'
+                                    key={index}
+                                    className={index <= rating ? 'on' : 'off'}
+                                    id='rating-button'
+                                    onClick={() => setRating(index)}
+                                >
+                                    <span className='star'>&#9733;</span>
+                                </button>
+                            )
+                        })}
+                    </div>
                 </label>
                 <label>
                     <input
