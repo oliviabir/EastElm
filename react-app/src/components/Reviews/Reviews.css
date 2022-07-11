@@ -11,6 +11,14 @@
     margin: 0 2% 2% 0;
 }
 
+.add-review-button:hover {
+    cursor: pointer;
+}
+
+.add-review-button:active {
+    background-color: rgba(236, 235, 235, 0.836)
+}
+
 .single-review-container {
     border-bottom: 1px solid rgb(175, 170, 170);
 }

@@ -14,9 +14,14 @@ const Cart = () => {
     const [itemRemoved, setItemRemoved] = useState(false)
 
     let orderArr = []
+    let priceArr = []
 
     const pushOrders = (orderInfo) => {
         orderArr.push(orderInfo)
+    }
+
+    const pushPrice = (price) => {
+        priceArr.push(price)
     }
 
     const cartRemoval = (cartItem) => {
@@ -24,6 +29,13 @@ const Cart = () => {
         localStorage.setItem('cart', JSON.stringify(newCart))
         dispatch(removeFromCart(cartItem))
         setItemRemoved(true)
+    }
+
+    const totalPrice = () => {
+        const priceSum = priceArr.reduce(
+            (prev, curr) => prev + curr
+        );
+        return priceSum
     }
 
     const handleCheckout = async () => {
@@ -47,36 +59,40 @@ const Cart = () => {
     }
 
     return (
-        <div>
+        <div className='cart-page'>
             <h2 className='cart-header'>Shopping Cart</h2>
             {checkoutComplete ? <div>Cart Empty</div> :
-            cart?.map((cartItem) => (
-                <div key={cartItem.id} className='cart-card-container'>
-                    {pushOrders(cartItem.id)}
-                    <img src={cartItem.img_one} className='item-img'/>
-                    <div className='cart-info-container'>
-                        <div className='item-name'>{cartItem.name}</div>
-                        <div className='item-price'>${cartItem.price}</div>
-                        <form className='cart-form'>
-                            <input
-                                name='num_of_product'
-                                type='number'
-                                value={numOfProduct}
-                                onChange={(e) => setNumOfProduct(e.target.value)}
-                                placeholder={'Quantity'}
-                            />
-                            <input
-                                name='instructions'
-                                type='text'
-                                value={instructions}
-                                onChange={(e) => setInstructions(e.target.value)}
-                                placeholder={'Instructions'}
-                            />
-                        </form>
-                        <button onClick={() => cartRemoval(cartItem)} className='remove-item-btn'>Remove Item</button>
+                cart?.map((cartItem) => (
+                    <div key={cartItem.id} className='cart-card-container'>
+                        {pushOrders(cartItem.id)}
+                        <img src={cartItem.img_one} className='item-img' />
+                        <div className='cart-info-container'>
+                            <div className='item-name'>{cartItem.name}</div>
+                            <div className='item-price'>${cartItem.price}</div>
+                            {pushPrice(cartItem.price)}
+                            <form className='cart-form'>
+                                <input
+                                    name='num_of_product'
+                                    type='number'
+                                    value={numOfProduct}
+                                    className='quantity-input'
+                                    onChange={(e) => setNumOfProduct(e.target.value)}
+                                    placeholder={'Quantity'}
+                                />
+                                <input
+                                    name='instructions'
+                                    type='text'
+                                    value={instructions}
+                                    className='instructions-input'
+                                    onChange={(e) => setInstructions(e.target.value)}
+                                    placeholder={'Delivery Instructions'}
+                                />
+                            </form>
+                            <button onClick={() => cartRemoval(cartItem)} className='remove-item-btn'>Remove Item</button>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            <p className='total-price-display'>Total:${totalPrice()}</p>
             <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button>
         </div>
     )
