@@ -36,7 +36,7 @@ const Reviews = ({ id, product }) => {
             {reviews.map((review) => (
                 <div key={review.id}>
                     <div>{review.body}</div>
-                    {(sessionUser.id == review.user_id) ? (
+                    {(sessionUser?.id == review.user_id) ? (
                         <div>
                             <button onClick={() => setShowEditModal(true)} className='reviews-buttons'>Edit Review</button>
                             {showEditModal && (

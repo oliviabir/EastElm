@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { authenticate } from './store/session';
+import { viewProducts } from './store/products';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import { authenticate } from './store/session';
 import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/Cart';
 import OrderHistory from './components/OrderHistory'
 import Reviews from './components/Reviews';
+import Chairs from './components/Chairs';
+import Sofas from './components/Sofas';
+import Tables from './components/Tables';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(viewProducts());
+  }, [dispatch]);
 
   useEffect(() => {
     (async() => {
@@ -62,6 +70,15 @@ function App() {
         </Route>
         <Route path='/reviews' exact={true} >
           <Reviews />
+        </Route>
+        <Route path='/chairs' exact={true} >
+          <Chairs />
+        </Route>
+        <Route path='/sofas' exact={true} >
+          <Sofas />
+        </Route>
+        <Route path='/tables' exact={true} >
+          <Tables />
         </Route>
       </Switch>
     </BrowserRouter>
