@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from "react-redux"
+import React from 'react'
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import './Home.css'
 
 const Home = () => {
     const products = useSelector((state) => {
@@ -15,29 +16,23 @@ const Home = () => {
 
     return (
         <div>
-            <p>Categories</p>
-            <div>
+            <p className='link-heading'>Categories</p>
+            <div className='category-links'>
                 <Link to={`/tables`} className='category-link-container'>
                     <img src={tables[6].img_one} alt={`${tables[6].name}-image`} className='category-link-image' />
-                    <div className='category-link-name'>{tables[6].name}</div>
-                    <div className='category-link-price'>${tables[6].price}</div>
-                    <br />
+                    <div className='category-link-descriptor'>Tables</div>
                 </Link>
                 <Link to={`/sofas`} className='category-link-container'>
                     <img src={sofas[2].img_one} alt={`${sofas[2].name}-image`} className='category-link-image' />
-                    <div className='category-link-name'>{sofas[2].name}</div>
-                    <div className='category-link-price'>${sofas[2].price}</div>
-                    <br />
+                    <div className='category-link-descriptor'>Sofas</div>
                 </Link>
                 <Link to={`/chairs`} className='category-link-container'>
                     <img src={chairs[9].img_one} alt={`${chairs[9].name}-image`} className='category-link-image' />
-                    <div className='category-link-name'>{chairs[9].name}</div>
-                    <div className='category-link-price'>${chairs[9].price}</div>
-                    <br />
+                    <div className='category-link-descriptor'>Chairs</div>
                 </Link>
             </div>
-            <p>Featured Products</p>
-            <div>
+            <p className='link-heading'>Featured Products</p>
+            <div className='featured-links'>
                 <Link to={`/products/${products[2].id}`} className='featured-link-container'>
                     <img src={products[2].img_one} alt={`${products[2].name}-image`} className='featured-link-image' />
                     <div className='featured-link-name'>{products[2].name}</div>
