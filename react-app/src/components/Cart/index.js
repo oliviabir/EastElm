@@ -21,7 +21,6 @@ const Cart = () => {
 
     const cartRemoval = (cartItem) => {
         const newCart = cart.filter(product => product.id !== cartItem.id)
-        console.log('NEW CART -->', newCart)
         localStorage.setItem('cart', JSON.stringify(newCart))
         dispatch(removeFromCart(cartItem))
         setItemRemoved(true)

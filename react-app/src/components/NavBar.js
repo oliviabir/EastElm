@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import { login } from '../store/session';
+import SearchBar from './SearchBar';
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -43,6 +44,9 @@ const NavBar = () => {
           <NavLink to='/products' exact={true} activeClassName='active'>
             Products
           </NavLink>
+        </li>
+        <li>
+          <SearchBar />
         </li>
         <li>
           <NavLink to='/cart' exact={true} activeClassName='active'>
