@@ -17,6 +17,7 @@ import Reviews from './components/Reviews';
 import Chairs from './components/Chairs';
 import Sofas from './components/Sofas';
 import Tables from './components/Tables';
+import Home from './components/Home';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -54,7 +55,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <Home />
         </ProtectedRoute>
         <Route path='/products' exact={true} >
           <Products />
