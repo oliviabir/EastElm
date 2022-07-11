@@ -9,6 +9,8 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
     const [body, setBody] = useState(review.body)
     const [errors, setErrors] = useState([])
 
+    const ratingArr = [1, 2, 3, 4, 5]
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -35,15 +37,20 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
-                <label>
-                    Rating
-                    <input
-                        name='rating'
-                        type='number'
-                        value={rating}
-                        onChange={(e) => setRating(e.target.value)}
-                    />
-                </label>
+                {ratingArr.map((index) => {
+                            index += 1
+                            return (
+                                <button
+                                    type='button'
+                                    key={index}
+                                    className={index <= rating ? 'on' : 'off'}
+                                    id='rating-button'
+                                    onClick={() => setRating(index)}
+                                >
+                                    <span className='star'>&#9733;</span>
+                                </button>
+                            )
+                        })}
                 <label>
                     <input
                         name='body'
