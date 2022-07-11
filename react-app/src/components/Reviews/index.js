@@ -20,6 +20,8 @@ const Reviews = ({ id, product }) => {
 
     const reviews = reviewsState.filter(review => review.product_id == id)
 
+    const ratingArr = [1, 2, 3, 4, 5]
+
     useEffect(() => {
         dispatch(viewReviews())
     }, [dispatch])
@@ -27,14 +29,20 @@ const Reviews = ({ id, product }) => {
     return (
         <div className='reviews-container'>
             <h2 className='reviews-heading'>Reviews</h2>
-            <button onClick={() => setShowModal(true)} className='reviews-buttons'>Leave a Review</button>
+            <button onClick={() => setShowModal(true)} className='add-review-button'>Leave a Review</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <AddReviewForm productId={product?.id} setShowModal={setShowModal} />
                 </Modal>
             )}
             {reviews.map((review) => (
-                <div key={review.id}>
+                <div key={review.id} className='single-review-container'>
+                    {ratingArr.map((index) => {
+                        index += 1
+                        return (
+                            <span className={index <= review.rating ? 'on' : 'off'}>&#9733;</span>
+                        )
+                    })}
                     <div>{review.body}</div>
                     {(sessionUser?.id == review.user_id) ? (
                         <div>
