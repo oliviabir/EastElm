@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkoutCart, removeFromCart } from "../../store/cart";
 import './Cart.css'
@@ -6,16 +6,25 @@ import './Cart.css'
 const Cart = () => {
     const dispatch = useDispatch()
     const sessionUser = useSelector((state) => state.session.user);
-    const { cart } = useSelector(state => state.cart)
+    const cart = JSON.parse(localStorage.getItem('cart'))
 
     const [numOfProduct, setNumOfProduct] = useState(1)
     const [instructions, setInstructions] = useState('')
     const [checkoutComplete, setCheckoutComplete] = useState(false)
+    const [itemRemoved, setItemRemoved] = useState(false)
 
     let orderArr = []
 
     const pushOrders = (orderInfo) => {
         orderArr.push(orderInfo)
+    }
+
+    const cartRemoval = (cartItem) => {
+        const newCart = cart.filter(product => product.id !== cartItem.id)
+        console.log('NEW CART -->', newCart)
+        localStorage.setItem('cart', JSON.stringify(newCart))
+        dispatch(removeFromCart(cartItem))
+        setItemRemoved(true)
     }
 
     const handleCheckout = async () => {
@@ -41,7 +50,7 @@ const Cart = () => {
     return (
         <div>
             <h2 className='cart-header'>Shopping Cart</h2>
-            {cart.map((cartItem) => (
+            {cart?.map((cartItem) => (
                 <div key={cartItem.id} className='cart-card-container'>
                     {pushOrders(cartItem.id)}
                     <img src={cartItem.img_one} className='item-img'/>
@@ -64,7 +73,7 @@ const Cart = () => {
                                 placeholder={'Instructions'}
                             />
                         </form>
-                        <button onClick={() => dispatch(removeFromCart(cartItem))} className='remove-item-btn'>Remove Item</button>
+                        <button onClick={() => cartRemoval(cartItem)} className='remove-item-btn'>Remove Item</button>
                     </div>
                 </div>
             ))}
