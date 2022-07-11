@@ -15,7 +15,7 @@ const Home = () => {
     // const tableArr = [tables[0], tables[1], tables[2]]
 
     return (
-        <div>
+        <div className='main-page-container'>
             <p className='link-heading'>Categories</p>
             <div className='category-links'>
                 <Link to={`/tables`} className='category-link-container'>
