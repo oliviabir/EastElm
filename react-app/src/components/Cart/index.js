@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkoutCart, removeFromCart } from "../../store/cart";
+import { updateItemQuantitiy, updateItemInstructions } from "../../store/cart";
 import './Cart.css'
 
 const Cart = () => {
@@ -8,27 +9,61 @@ const Cart = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const cart = JSON.parse(localStorage.getItem('cart'))
 
-    const [numOfProduct, setNumOfProduct] = useState(1)
     const [instructions, setInstructions] = useState('')
     const [checkoutComplete, setCheckoutComplete] = useState(false)
     const [itemRemoved, setItemRemoved] = useState(false)
 
-    let orderArr = []
-    let priceArr = []
-
-    const pushOrders = (orderInfo) => {
-        orderArr.push(orderInfo)
-    }
+    let priceArr = [0]
 
     const pushPrice = (price) => {
         priceArr.push(price)
     }
 
+    const updateQuantity = (e, cartItem) => {
+        let cart = []
+
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'))
+        } else {
+            cart = []
+        }
+
+        cart.forEach(product => {
+            if (product.id === cartItem.id) {
+                product.num_of_product = e.target.value
+                dispatch(updateItemQuantitiy(product, e.target.value))
+            }
+        })
+
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }
+
+    const updateInstructions = (e, cartItem) => {
+        let cart = []
+
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'))
+        } else {
+            cart = []
+        }
+
+        cart.forEach(product => {
+            if (product.id === cartItem.id) {
+                product.instructions = e.target.value
+                dispatch(updateItemInstructions(product, e.target.value))
+            }
+        })
+
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }
+
     const cartRemoval = (cartItem) => {
         const newCart = cart.filter(product => product.id !== cartItem.id)
+
         localStorage.setItem('cart', JSON.stringify(newCart))
+
         dispatch(removeFromCart(cartItem))
-        setItemRemoved(true)
+        setItemRemoved(current => !current)
     }
 
     const totalPrice = () => {
@@ -39,19 +74,21 @@ const Cart = () => {
     }
 
     const handleCheckout = async () => {
-        const product_id = orderArr.pop()
+        const product = cart.pop()
 
         const user_id = sessionUser.id
 
         const payload = {
             user_id,
-            product_id,
-            num_of_product: numOfProduct,
-            instructions
+            product_id: product.id,
+            num_of_product: product.num_of_product,
+            instructions: product.instructions
         }
 
-        let createdOrder = await dispatch(checkoutCart(payload))
-        if (orderArr.length > 0) {
+        await dispatch(checkoutCart(payload))
+        await dispatch(removeFromCart(product))
+
+        if (cart.length > 0) {
             handleCheckout()
         } else {
             setCheckoutComplete(true)
@@ -64,7 +101,6 @@ const Cart = () => {
             {checkoutComplete ? <div>Cart Empty</div> :
                 cart?.map((cartItem) => (
                     <div key={cartItem.id} className='cart-card-container'>
-                        {pushOrders(cartItem.id)}
                         <img src={cartItem.img_one} className='item-img' />
                         <div className='cart-info-container'>
                             <div className='item-name'>{cartItem.name}</div>
@@ -74,17 +110,17 @@ const Cart = () => {
                                 <input
                                     name='num_of_product'
                                     type='number'
-                                    value={numOfProduct}
+                                    defaultValue={cartItem.num_of_product}
                                     className='quantity-input'
-                                    onChange={(e) => setNumOfProduct(e.target.value)}
-                                    placeholder={'Quantity'}
+                                    onChange={(e) => updateQuantity(e, cartItem)}
+                                    placeholder={cartItem.num_of_product}
                                 />
                                 <input
                                     name='instructions'
                                     type='text'
-                                    value={instructions}
+                                    defaultValue={cartItem.instructions}
                                     className='instructions-input'
-                                    onChange={(e) => setInstructions(e.target.value)}
+                                    onChange={(e) => updateInstructions(e, cartItem)}
                                     placeholder={'Delivery Instructions'}
                                 />
                             </form>
@@ -92,7 +128,7 @@ const Cart = () => {
                         </div>
                     </div>
                 ))}
-            <p className='total-price-display'>Total:${totalPrice()}</p>
+            {priceArr.length > 1 ? <p className='total-price-display'>Total:${totalPrice()}</p> : null}
             <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button>
         </div>
     )

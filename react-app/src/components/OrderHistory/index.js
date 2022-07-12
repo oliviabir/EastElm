@@ -4,6 +4,7 @@ import { Modal } from '../../context/Modal';
 import { viewOrders, removeOrder } from "../../store/orders"
 import ItemInfo from "./ItemInfo"
 import EditOrder from "../EditOrder"
+import './OrderHistory.css'
 
 const OrderHistory = () => {
     const dispatch = useDispatch()
@@ -38,7 +39,7 @@ const OrderHistory = () => {
     }
 
     return (
-        <div>
+        <div className='order-history-container'>
             {orders?.map((order) => (
                 <div key={order.id}>
                     <ItemInfo order={order}/>
