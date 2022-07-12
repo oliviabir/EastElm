@@ -4,3 +4,13 @@ Describe the problem (what are you trying to do? what is it currently doing?)
 What error messages do you have? (screenshot or copy)
 What have you done to debug? / What have you searched/tried?
 Relevant code snippets/screenshots with explanations (crop, mark-up, or explain them)
+
+What are you working on?
+Pushing to github to deploy to heroku, reviews branch
+Describe the problem
+I'm recieving this error message:
+Error: Can't use 'tar -xzf' extract archive file: /home/runner/work/_actions/_temp_01f0cbeb-59d1-4b0f-850d-bb6cf5eab67b/a7ec2058-daf3-4f67-845f-2daafe20ec6a.tar.gz. return code: 2.
+This is happening right at set up job. I've been consistently pushing to heroku throughout the process and haven't had any issues. I did not add any files, only code so I'm not sure what it's trying to extract
+What have you done to debug? / What have you searched/tried?
+I've googled the error message but everything that come is people who are trying to upload zip files
+Relevant code snippets/screenshots with explanations (crop, mark-up, or explain them)

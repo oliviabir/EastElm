@@ -45,12 +45,7 @@ const OrderHistory = () => {
                     <ItemInfo order={order}/>
                     <div>Quantity: {order.num_of_product}</div>
                     <div>Instructions: {order.instructions}</div>
-                    <button onClick={() => setShowModal(true)}>Edit Order Info</button>
-                    {showModal && (
-                        <Modal onClose={() => setShowModal(false)}>
-                            <EditOrder order={order} setShowModal={setShowModal} />
-                        </Modal>
-                    )}
+                    <EditOrder order={order} />
                     {pushOrders(order.id)}
                     <br />
                 </div>
