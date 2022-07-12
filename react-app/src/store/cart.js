@@ -1,10 +1,22 @@
 const ADD_TO_CART = 'cart/ADD_TO_CART'
+const UPDATE_CART_QUANTITY = 'cart/UPDATE_CART_QUANTITY'
+const UPDATE_CART_INSTRUCTIONS = 'cart/UPDATE_CART_INSTRUCTIONS'
 const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART'
 const CHECKOUT_CART = 'cart/CHECKOUT_CART'
 
 const addItem = (cart) => ({
     type: ADD_TO_CART,
-    cart,
+    cart
+})
+
+const updateCartQuantity = (cart) => ({
+    type: UPDATE_CART_QUANTITY,
+    cart
+})
+
+const updateCartInstructions = (cart) => ({
+    type: UPDATE_CART_INSTRUCTIONS,
+    cart
 })
 
 const removeItem = (cart) => ({
@@ -29,6 +41,38 @@ export const addToCart = (product) => async (dispatch) => {
     cart.push(product)
     localStorage.setItem('cart', JSON.stringify(cart))
     dispatch(addItem(cart))
+}
+
+export const updateItemQuantitiy = (product, quantity) => async (dispatch) => {
+    let cart = []
+
+    if (localStorage.getItem('cart')) {
+        cart = JSON.parse(localStorage.getItem('cart'))
+    } else {
+        cart = []
+    }
+
+    product['num_of_product'] = quantity
+
+    cart.push(product)
+    localStorage.setItem('cart', JSON.stringify(cart))
+    dispatch(updateCartQuantity(cart))
+}
+
+export const updateItemInstructions = (product, instructions) => async (dispatch) => {
+    let cart = []
+
+    if (localStorage.getItem('cart')) {
+        cart = JSON.parse(localStorage.getItem('cart'))
+    } else {
+        cart = []
+    }
+
+    product['instructions'] = instructions
+
+    cart.push(product)
+    localStorage.setItem('cart', JSON.stringify(cart))
+    dispatch(updateCartQuantity(cart))
 }
 
 export const removeFromCart = (product) => async (dispatch) => {
@@ -66,6 +110,14 @@ export const checkoutCart = (product) => async (dispatch) => {
 const cartReducer = (state = { cart: [] }, action) => {
     switch (action.type) {
         case ADD_TO_CART:
+            return {
+                cart: [...action.cart]
+            }
+        case UPDATE_CART_QUANTITY:
+            return {
+                cart: [...action.cart]
+            }
+        case UPDATE_CART_INSTRUCTIONS:
             return {
                 cart: [...action.cart]
             }
