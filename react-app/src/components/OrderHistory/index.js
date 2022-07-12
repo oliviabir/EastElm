@@ -43,7 +43,7 @@ const OrderHistory = () => {
             {orders?.map((order) => (
                 <div key={order.id}>
                     <ItemInfo order={order}/>
-                    <div>Quantity: {order.num_of_product}</div>
+                    <div>Quantity: {order.num_of_product ? order.num_of_product : 1}</div>
                     <div>Instructions: {order.instructions}</div>
                     <EditOrder order={order} />
                     {pushOrders(order.id)}
