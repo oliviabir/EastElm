@@ -9,15 +9,10 @@ const Cart = () => {
     const sessionUser = useSelector((state) => state.session.user);
     const cart = JSON.parse(localStorage.getItem('cart'))
 
-    const [instructions, setInstructions] = useState('')
     const [checkoutComplete, setCheckoutComplete] = useState(false)
     const [itemRemoved, setItemRemoved] = useState(false)
+    const [quantityChanged, setQuantityChanged] = useState(false)
 
-    let priceArr = [0]
-
-    const pushPrice = (price) => {
-        priceArr.push(price)
-    }
 
     const updateQuantity = (e, cartItem) => {
         let cart = []
@@ -35,7 +30,9 @@ const Cart = () => {
             }
         })
 
+        setQuantityChanged(current => !current)
         localStorage.setItem('cart', JSON.stringify(cart))
+
     }
 
     const updateInstructions = (e, cartItem) => {
@@ -57,6 +54,13 @@ const Cart = () => {
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 
+    const getProductPrice = (price, quantity) => {
+        const productPrice = price * quantity
+        console.log('Product Price', productPrice)
+        console.log('Product Quantity', quantity)
+        return productPrice
+    }
+
     const cartRemoval = (cartItem) => {
         const newCart = cart.filter(product => product.id !== cartItem.id)
 
@@ -64,14 +68,28 @@ const Cart = () => {
 
         dispatch(removeFromCart(cartItem))
         setItemRemoved(current => !current)
-
-        console.log('PRODUCT --->', cart.pop())
     }
 
     const totalPrice = () => {
-        const priceSum = priceArr.reduce(
-            (prev, curr) => prev + curr
-        );
+        let priceArr = []
+
+        cart.forEach(product => {
+            if (product.num_of_product) {
+                const productTotal = product.price * product.num_of_product
+                priceArr.push(productTotal)
+            } else {
+                priceArr.push(product.price)
+            }
+        })
+        console.log('price array', priceArr)
+        let priceSum = 0
+
+        if (priceArr.length > 0) {
+            priceSum = priceArr.reduce(
+                (prev, curr) => prev + curr
+            );
+        }
+
         return priceSum
     }
 
@@ -100,11 +118,8 @@ const Cart = () => {
             await dispatch(removeFromCart(product))
 
         }
-        // if (cart.length > 0) {
-        //     handleCheckout()
-        // } else {
-            setCheckoutComplete(true)
-        // }
+
+        setCheckoutComplete(true)
 
     }
 
@@ -117,13 +132,18 @@ const Cart = () => {
                         <img src={cartItem.img_one} className='item-img' />
                         <div className='cart-info-container'>
                             <div className='item-name'>{cartItem.name}</div>
-                            <div className='item-price'>${cartItem.price}</div>
-                            {pushPrice(cartItem.price)}
+                            {cartItem.num_of_product > 1 ?
+                                <div className='item-price'>
+                                    ${getProductPrice(cartItem.price, cartItem.num_of_product)}
+                                </div>
+                                : <div className='item-price'>${cartItem.price}</div>}
                             <form className='cart-form'>
                                 <input
                                     name='num_of_product'
                                     type='number'
-                                    defaultValue={cartItem.num_of_product}
+                                    min='1'
+                                    max='5'
+                                    defaultValue={cartItem.num_of_product ? cartItem.num_of_product : 1}
                                     className='quantity-input'
                                     onChange={(e) => updateQuantity(e, cartItem)}
                                     placeholder={cartItem.num_of_product}
@@ -141,7 +161,7 @@ const Cart = () => {
                         </div>
                     </div>
                 ))}
-            {priceArr.length > 1 ? <p className='total-price-display'>Total:${totalPrice()}</p> : null}
+            {totalPrice() > 0 ? <p className='total-price-display'>Total:${totalPrice()}</p> : null}
             <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button>
         </div>
     )
