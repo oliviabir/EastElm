@@ -76,25 +76,36 @@ const Cart = () => {
     }
 
     const handleCheckout = async () => {
-        const product = cart.pop()
+        let cart = []
+
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'))
+        } else {
+            cart = []
+        }
 
         const user_id = sessionUser.id
 
-        const payload = {
-            user_id,
-            product_id: product.id,
-            num_of_product: product.num_of_product,
-            instructions: product.instructions
+        for (let i = 0; i < cart.length; i++) {
+            const product = cart[i]
+
+            const payload = {
+                user_id,
+                product_id: product?.id,
+                num_of_product: product?.num_of_product,
+                instructions: product?.instructions
+            }
+
+            await dispatch(checkoutCart(payload))
+            await dispatch(removeFromCart(product))
+
         }
-
-        await dispatch(checkoutCart(payload))
-        await dispatch(removeFromCart(product))
-
-        if (cart.length > 0) {
-            handleCheckout()
-        } else {
+        // if (cart.length > 0) {
+        //     handleCheckout()
+        // } else {
             setCheckoutComplete(true)
-        }
+        // }
+
     }
 
     return (
