@@ -100,8 +100,7 @@ export const checkoutCart = (product) => async (dispatch) => {
 
     if (newOrder) {
       dispatch(checkout(newOrder));
-    //   const cart = []
-    //   localStorage.setItem('cart', [])
+      localStorage.setItem('cart', [])
     }
 
     return newOrder;

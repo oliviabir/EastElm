@@ -5,3 +5,7 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
+.lower-nav-links:hover {
+    border-bottom: 1px solid black;
+}
