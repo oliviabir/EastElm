@@ -8,9 +8,20 @@ const ItemInfo = ({ order }) => {
     const products = useSelector((state) => {
         return Object.values(state.products)
     });
+    console.log('ORDER QTY', order.num_of_product)
 
     const itemArr = products.filter(product => product.id == order.product_id )
     const item = itemArr[0]
+
+    const getProductPrice = (price) => {
+        let productPrice
+        if (order.num_of_product) {
+            productPrice = price * order.num_of_product
+        } else {
+            productPrice = price
+        }
+        return productPrice
+    }
 
     useEffect(() => {
         dispatch(viewProducts())
@@ -19,7 +30,7 @@ const ItemInfo = ({ order }) => {
     return (
         <div>
             <div>{item?.name}</div>
-            <div>{item?.price}</div>
+            <div>${getProductPrice(item.price)}</div>
             <img src={item?.img_one} alt={`${item?.name}-image`} />
         </div>
     )

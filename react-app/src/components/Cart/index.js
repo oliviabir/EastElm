@@ -56,8 +56,6 @@ const Cart = () => {
 
     const getProductPrice = (price, quantity) => {
         const productPrice = price * quantity
-        console.log('Product Price', productPrice)
-        console.log('Product Quantity', quantity)
         return productPrice
     }
 
