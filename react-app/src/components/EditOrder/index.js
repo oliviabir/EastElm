@@ -37,14 +37,14 @@ const EditOrder = ({ order, setShowModal }) => {
             <input
                 name='num_of_product'
                 type='number'
-                value={numOfProducts}
+                defaultValue={order.num_of_product}
                 onChange={(e) => setNumOfProducts(e.target.value)}
                 placeholder={'Number of products'}
             />
             <input
                 name='instructions'
                 type='text'
-                value={instructions}
+                defaultValue={order.instructions}
                 onChange={(e) => setInstructions(e.target.value)}
                 placeholder={'Instructions'}
             />
