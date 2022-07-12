@@ -64,6 +64,8 @@ const Cart = () => {
 
         dispatch(removeFromCart(cartItem))
         setItemRemoved(current => !current)
+
+        console.log('PRODUCT --->', cart.pop())
     }
 
     const totalPrice = () => {

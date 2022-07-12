@@ -43,6 +43,8 @@ const OrderHistory = () => {
             {orders?.map((order) => (
                 <div key={order.id}>
                     <ItemInfo order={order}/>
+                    {console.log('ORDER QTY***', order.num_of_product)}
+                    {console.log('ORDER INSTRUCTIONS***', order.instructions)}
                     <div>Quantity: {order.num_of_product}</div>
                     <div>Instructions: {order.instructions}</div>
                     <button onClick={() => setShowModal(true)}>Edit Order Info</button>
