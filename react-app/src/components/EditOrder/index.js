@@ -1,56 +1,21 @@
-import React, {useState} from "react";
-import { useDispatch } from "react-redux";
-import { editOrder } from "../../store/orders";
+import React, { useState } from 'react';
+import { Modal } from '../../context/Modal';
+import EditOrderForm from './EditOrderForm';
 
-const EditOrder = ({ order, setShowModal }) => {
-    const dispatch = useDispatch()
 
-    const [numOfProducts, setNumOfProducts] = useState(order.num_of_products)
-    const [instructions, setInstructions] = useState(order.instructions)
-    const [errors, setErrors] = useState([])
+function EditOrder({order}) {
+  const [showModal, setShowModal] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        const payload = {
-            user_id: order.user_id,
-            product_id: order.product_id,
-            num_of_product: numOfProducts,
-            instructions
-        }
-
-        let editedOrder = await dispatch(editOrder(payload, order.id))
-
-        if (editedOrder) {
-            setErrors([])
-            setShowModal(false)
-        }
-    }
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <ul>
-                {errors.map((error, idx) => (
-                    <li key={idx}>{error}</li>
-                ))}
-            </ul>
-            <input
-                name='num_of_product'
-                type='number'
-                defaultValue={order.num_of_product}
-                onChange={(e) => setNumOfProducts(e.target.value)}
-                placeholder={'Number of products'}
-            />
-            <input
-                name='instructions'
-                type='text'
-                defaultValue={order.instructions}
-                onChange={(e) => setInstructions(e.target.value)}
-                placeholder={'Instructions'}
-            />
-            <button type='submit'>Confirm</button>
-        </form>
-    )
+  return (
+      <div>
+          <button onClick={() => setShowModal(true)}>Edit Order Info</button>
+          {showModal && (
+              <Modal onClose={() => setShowModal(false)}>
+                  <EditOrderForm order={order} setShowModal={setShowModal} />
+              </Modal>
+          )}
+      </div>
+  );
 }
 
 export default EditOrder
