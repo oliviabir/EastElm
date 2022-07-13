@@ -45,18 +45,19 @@ const OrderHistory = () => {
     return (
         <div className='order-history-container'>
             <h2 className='order-history-header'>Order History</h2>
-            {usersOrders.length > 0 ?
-                usersOrders?.map((order) => (
+            {usersOrders.length === 0 ?
+                <h2>You have no orders</h2>
+                : usersOrders?.map((order) => (
                     <div>
                         <div key={order.id}>
                             <ItemInfo order={order} />
                             {pushOrders(order.id)}
                             <br />
                         </div>
-                        <button onClick={handleCancel} className='cancel-order-btn'>Cancel Order</button>
                     </div>
                 ))
-                : <h2>You have no orders</h2>}
+            }
+            <button onClick={handleCancel} className='cancel-order-btn'>Cancel Order</button>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
 import { login } from '../../store/session';
 import LogoutButton from '../auth/LogoutButton';
@@ -10,10 +10,12 @@ const AccountButton = () => {
 
     const [showMenu, setShowMenu] = useState(false)
 
+    const sessionUser = useSelector(state => state.session.user)
+
     const demoLogin = async (e) => {
         e.preventDefault();
         await dispatch(login('demo@aa.io', 'password'));
-      };
+    };
 
     const openMenu = () => {
         if (showMenu) {
@@ -54,13 +56,19 @@ const AccountButton = () => {
                         </Link>
                     </div>
                     <br />
-                    <div>
-                        <button onClick={demoLogin} className='demo-login-btn'>Demo Login</button>
-                    </div>
+                    {sessionUser?.id === 1 ?
+                        null
+                        : <div>
+                            <button onClick={demoLogin} className='demo-login-btn'>Demo Login</button>
+                        </div>
+                    }
                     <br />
-                    <div>
-                        <LogoutButton />
-                    </div>
+                    {!sessionUser ? null
+                        : <div>
+                            <LogoutButton />
+                        </div>
+                    }
+
                 </div>
             )}
         </div>
