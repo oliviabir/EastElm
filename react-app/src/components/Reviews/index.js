@@ -4,14 +4,13 @@ import { Modal } from '../../context/Modal';
 import { viewReviews } from "../../store/reviews"
 import AddReviewForm from "../AddReview";
 import DeleteReview from "../DeleteReview"
-import EditReviewForm from "../EditReview"
+import EditReview from "../EditReview"
 import './Reviews.css'
 
 const Reviews = ({ id, product }) => {
     const dispatch = useDispatch()
 
     const [showModal, setShowModal] = useState(false)
-    const [showEditModal, setShowEditModal] = useState(false)
 
     const sessionUser = useSelector(state => state.session.user)
     const reviewsState = useSelector((state) => {
@@ -48,12 +47,7 @@ const Reviews = ({ id, product }) => {
                     <div>{review.body}</div>
                     {(sessionUser?.id == review.user_id) ? (
                         <div>
-                            <button onClick={() => setShowEditModal(true)} className='reviews-buttons'>Edit Review</button>
-                            {showEditModal && (
-                                <Modal onClose={() => setShowEditModal(false)}>
-                                    <EditReviewForm review={review} setShowEditModal={setShowEditModal} />
-                                </Modal>
-                            )}
+                            <EditReview review={review} />
                             <DeleteReview review={review} productId={id} />
                         </div>
                     ) : null}
