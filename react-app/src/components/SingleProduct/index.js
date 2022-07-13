@@ -12,6 +12,8 @@ const SingleProduct = () => {
 
     const dispatch = useDispatch();
 
+    const sessionUser = useSelector(state => state.session.user)
+
     const products = useSelector((state) => {
         return Object.values(state.products);
     });
@@ -42,7 +44,9 @@ const SingleProduct = () => {
                 <div className='single-product-right-panel'>
                     <div className='single-product-name'>{product?.name}</div>
                     <div className='single-product-price'>${product?.price}</div>
-                    <button onClick={handleAddItemToCart} className='single-product-add-button'>Add to Cart</button>
+                    {sessionUser ?
+                        <button onClick={handleAddItemToCart} className='single-product-add-button'>Add to Cart</button>
+                    : null}
                     {addedToCart ? <div>Item added to your cart</div> : null}
                     {alreadyInCart ? <div>This item is already in your cart</div> : null}
                     <Reviews id={product?.id} product={product}/>

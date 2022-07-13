@@ -10,6 +10,8 @@ import './NavBar.css'
 
 const NavBar = () => {
 
+  const sessionUser = useSelector(state => state.session.user)
+
   return (
     <nav>
       <ul>
@@ -22,16 +24,16 @@ const NavBar = () => {
           </NavLink>
         </li>
         <div className='right-links'>
-          <li>
-            <NavLink to='/orders' exact={true} id='order-history-link'>
-              Order History
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/cart' exact={true} id='cart-link'>
-              Cart
-            </NavLink>
-          </li>
+          {sessionUser ?
+            <div>
+                <NavLink to='/orders' exact={true} id='order-history-link'>
+                  Order History
+                </NavLink>
+                <NavLink to='/cart' exact={true} id='cart-link'>
+                  Cart
+                </NavLink>
+            </div>
+            : null}
           <li>
             <AccountButton />
           </li>
