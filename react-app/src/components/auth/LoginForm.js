@@ -15,7 +15,17 @@ const LoginForm = () => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
+      let errorsArr = []
+      console.log('ERRORS ARRAY', errorsArr)
+
+      data.forEach(error => {
+        const splitError = error.split(':')
+        if (errorsArr.length < 2) {
+          errorsArr.push(splitError[1])
+        }
+      })
+
+      setErrors(errorsArr)
     }
   };
 
@@ -38,8 +48,9 @@ const LoginForm = () => {
           <div key={ind}>{error}</div>
         ))}
       </div>
+      <div>Fields marked with * are required</div>
       <div>
-        <label htmlFor='email'>Email</label>
+        <label htmlFor='email'>Email*</label>
         <input
           name='email'
           type='text'
@@ -49,7 +60,7 @@ const LoginForm = () => {
         />
       </div>
       <div>
-        <label htmlFor='password'>Password</label>
+        <label htmlFor='password'>Password*</label>
         <input
           name='password'
           type='password'
