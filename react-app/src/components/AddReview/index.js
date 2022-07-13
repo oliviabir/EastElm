@@ -39,6 +39,8 @@ const AddReviewForm = ({ productId, setShowModal }) => {
 
         let newReview = await dispatch(addReview(payload))
 
+        console.log('NEW REVIEW -->', newReview)
+
         if (newReview) {
             setErrors([])
             setShowModal(false)
