@@ -45,13 +45,13 @@ const AccountButton = () => {
             {showMenu && (
                 <div className='account-links-menu'>
                     <div>
-                        <Link to='/login' exact={true} className='auth-buttons' id='login-button'>
+                        <Link to='/login' className='auth-buttons' id='login-button'>
                             Login
                         </Link>
                     </div>
                     <br />
                     <div>
-                        <Link to='/sign-up' exact={true} className='auth-buttons' id='signup-button'>
+                        <Link to='/sign-up' className='auth-buttons' id='signup-button'>
                             Sign Up
                         </Link>
                     </div>
