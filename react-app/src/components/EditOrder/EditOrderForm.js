@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editOrder } from "../../store/orders";
+import './EditOrder.css'
 
 const EditOrderForm = ({ order, setShowModal }) => {
     const dispatch = useDispatch()
@@ -34,21 +35,27 @@ const EditOrderForm = ({ order, setShowModal }) => {
                     <li key={idx}>{error}</li>
                 ))}
             </ul>
-            <input
-                name='num_of_product'
-                type='number'
-                defaultValue={order.num_of_product}
-                onChange={(e) => setNumOfProducts(e.target.value)}
-                placeholder={'Number of products'}
-            />
-            <input
-                name='instructions'
-                type='text'
-                defaultValue={order.instructions}
-                onChange={(e) => setInstructions(e.target.value)}
-                placeholder={'Instructions'}
-            />
-            <button type='submit'>Confirm</button>
+            <div className='edit-input-container'>
+                <input
+                    name='num_of_product'
+                    type='number'
+                    min='1'
+                    max='5'
+                    className='edit-num-input'
+                    defaultValue={order.num_of_product ? order.num_of_product : 1}
+                    onChange={(e) => setNumOfProducts(e.target.value)}
+                    placeholder={'Number of products'}
+                />
+                <textarea
+                    name='instructions'
+                    className='edit-instructions-input'
+                    // type='text'
+                    defaultValue={order.instructions}
+                    onChange={(e) => setInstructions(e.target.value)}
+                    placeholder={'Add Delivery Instructions'}
+                />
+            <button type='submit' className='confirm-edit-btn'>Confirm</button>
+            </div>
         </form>
     )
 }

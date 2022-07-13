@@ -1,6 +1,8 @@
 import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { viewProducts } from "../../store/products"
+import EditOrder from "../EditOrder"
+import './OrderHistory.css'
 
 const ItemInfo = ({ order }) => {
     const dispatch = useDispatch()
@@ -8,7 +10,6 @@ const ItemInfo = ({ order }) => {
     const products = useSelector((state) => {
         return Object.values(state.products)
     });
-    console.log('ORDER QTY', order.num_of_product)
 
     const itemArr = products.filter(product => product.id == order.product_id )
     const item = itemArr[0]
@@ -28,10 +29,15 @@ const ItemInfo = ({ order }) => {
     }, [dispatch])
 
     return (
-        <div>
-            <div>{item?.name}</div>
-            <div>${getProductPrice(item.price)}</div>
-            <img src={item?.img_one} alt={`${item?.name}-image`} />
+        <div className='order-card-container'>
+            <img src={item?.img_one} alt={`${item?.name}-image`} className='item-img'/>
+            <div className='order-info-container'>
+                <div className='product-name'>{item?.name}</div>
+                <div className='product-price'>${getProductPrice(item.price)}</div>
+                <div className='product-editable-info'>Quantity: {order.num_of_product ? order.num_of_product : 1}</div>
+                <div className='product-editable-info'>Instructions: {order.instructions}</div>
+                <EditOrder order={order} />
+            </div>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EditOrderForm from './EditOrderForm';
+import './EditOrder.css'
 
 
 function EditOrder({order}) {
@@ -8,7 +9,7 @@ function EditOrder({order}) {
 
   return (
       <div>
-          <button onClick={() => setShowModal(true)}>Edit Order Info</button>
+          <button onClick={() => setShowModal(true)} className='edit-order-btn'>Edit Order Info</button>
           {showModal && (
               <Modal onClose={() => setShowModal(false)}>
                   <EditOrderForm order={order} setShowModal={setShowModal} />
