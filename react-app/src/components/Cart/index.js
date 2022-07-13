@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { checkoutCart, removeFromCart } from "../../store/cart";
 import { updateItemQuantitiy, updateItemInstructions } from "../../store/cart";
 import './Cart.css'
 
 const Cart = () => {
     const dispatch = useDispatch()
+
     const sessionUser = useSelector((state) => state.session.user);
     const cart = JSON.parse(localStorage.getItem('cart'))
 
@@ -100,7 +102,7 @@ const Cart = () => {
             cart = []
         }
 
-        const user_id = sessionUser.id
+        const user_id = sessionUser?.id
 
         for (let i = 0; i < cart.length; i++) {
             const product = cart[i]
