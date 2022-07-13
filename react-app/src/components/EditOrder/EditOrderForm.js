@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { editOrder } from "../../store/orders";
 import './EditOrder.css'
@@ -10,8 +10,26 @@ const EditOrderForm = ({ order, setShowModal }) => {
     const [instructions, setInstructions] = useState(order.instructions)
     const [errors, setErrors] = useState([])
 
+    useEffect(() => {
+        const errors = [];
+        if (numOfProducts > 5) {
+            errors.push('All items limited to a quantity of 5');
+        }  else if (numOfProducts < 1) {
+            errors.push('Must have at least one of this item')
+        }
+        if (instructions.length > 50) {
+            errors.push('Instructions limited to 50 characters')
+        }
+
+        setErrors(errors);
+    }, [numOfProducts, instructions]);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        if (errors.length > 0) {
+            return
+        }
 
         const payload = {
             user_id: order.user_id,

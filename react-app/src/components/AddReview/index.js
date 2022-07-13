@@ -14,8 +14,8 @@ const AddReviewForm = ({ productId, setShowModal }) => {
     useEffect(() => {
         const errors = [];
         if (body.length > 500) {
-            errors.push('Review must be less than 500 characters');
-        }  else if (body.length < 0) {
+            errors.push('Review must be less than 200 characters');
+        }  else if (body.length < 1) {
             errors.push('Review must contain content')
         }
         if (rating < 1) {
@@ -30,6 +30,10 @@ const AddReviewForm = ({ productId, setShowModal }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (errors.length > 0) {
+            return
+        }
+
         const payload = {
             user_id: sessionUser.id,
             product_id: productId,
@@ -38,8 +42,6 @@ const AddReviewForm = ({ productId, setShowModal }) => {
         }
 
         let newReview = await dispatch(addReview(payload))
-
-        console.log('NEW REVIEW -->', newReview)
 
         if (newReview) {
             setErrors([])
@@ -55,9 +57,9 @@ const AddReviewForm = ({ productId, setShowModal }) => {
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
-                <div>Fields marked with * are required</div>
+                <div>All fields are required</div>
                 <label>
-                    Rating*
+                    Rating
                     <div>
                         {ratingArr.map((index) => {
                             index += 1
@@ -75,7 +77,7 @@ const AddReviewForm = ({ productId, setShowModal }) => {
                         })}
                     </div>
                 </label>
-                <label>*
+                <label>
                     <input
                         name='body'
                         type='text'

@@ -12,8 +12,8 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
     useEffect(() => {
         const errors = [];
         if (body.length > 500) {
-            errors.push('Review must be less than 500 characters');
-        } else if (body.length < 0) {
+            errors.push('Review must be less than 200 characters');
+        } else if (body.length < 1) {
             errors.push('Review must contain content')
         }
         if (rating < 1) {
@@ -21,14 +21,14 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
         }
 
         setErrors(errors);
-    }, [body]);
+    }, [body, rating]);
 
     const ratingArr = [1, 2, 3, 4, 5]
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if (errors) {
+        if (errors.length > 0) {
             return
         }
 
@@ -55,7 +55,11 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
-                {ratingArr.map((index) => {
+                <div>All fields are required</div>
+                <label>
+                    Rating
+                    <div>
+                        {ratingArr.map((index) => {
                             index += 1
                             return (
                                 <button
@@ -69,6 +73,8 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
                                 </button>
                             )
                         })}
+                    </div>
+                </label>
                 <label>
                     <input
                         name='body'

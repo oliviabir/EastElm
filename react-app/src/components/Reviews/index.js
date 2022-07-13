@@ -42,7 +42,7 @@ const Reviews = ({ id, product }) => {
                     {ratingArr.map((index) => {
                         index += 1
                         return (
-                            <span className={index <= review.rating ? 'on' : 'off'}>&#9733;</span>
+                            <span key={index} className={index <= review.rating ? 'on' : 'off'}>&#9733;</span>
                         )
                     })}
                     <div>{review.body}</div>
