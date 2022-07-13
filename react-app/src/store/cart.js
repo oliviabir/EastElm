@@ -38,9 +38,14 @@ export const addToCart = (product) => async (dispatch) => {
         cart = []
     }
 
-    cart.push(product)
-    localStorage.setItem('cart', JSON.stringify(cart))
-    dispatch(addItem(cart))
+    const duplicates = cart.filter(cartItem => cartItem.id === product.id)
+
+    if (duplicates.length === 0) {
+        cart.push(product)
+        localStorage.setItem('cart', JSON.stringify(cart))
+        dispatch(addItem(cart))
+    }
+
 }
 
 export const updateItemQuantitiy = (product, quantity) => async (dispatch) => {
