@@ -72,7 +72,7 @@ export const updateItemInstructions = (product, instructions) => async (dispatch
 
     cart.push(product)
     localStorage.setItem('cart', JSON.stringify(cart))
-    dispatch(updateCartQuantity(cart))
+    dispatch(updateCartInstructions(cart))
 }
 
 export const removeFromCart = (product) => async (dispatch) => {

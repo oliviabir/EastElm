@@ -14,46 +14,67 @@ const Cart = () => {
     const [checkoutComplete, setCheckoutComplete] = useState(false)
     const [itemRemoved, setItemRemoved] = useState(false)
     const [quantityChanged, setQuantityChanged] = useState(false)
+    const [quantityErrors, setQuantityErrors] = useState([]);
+    const [instructionErrors, setInstructionErrors] = useState([])
 
 
     const updateQuantity = (e, cartItem) => {
-        let cart = []
 
-        if (localStorage.getItem('cart')) {
-            cart = JSON.parse(localStorage.getItem('cart'))
-        } else {
-            cart = []
+        if(e.target.value > 0 && e.target.value < 6) {
+            setQuantityErrors([])
+            let cart = []
+
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'))
+            } else {
+                cart = []
+            }
+
+            cart.forEach(product => {
+                if (product.id === cartItem.id) {
+                    product.num_of_product = e.target.value
+                    dispatch(updateItemQuantitiy(product, e.target.value))
+                }
+            })
+
+            setQuantityChanged(current => !current)
+            localStorage.setItem('cart', JSON.stringify(cart))
+        } else if (e.target.value < 1) {
+            setQuantityErrors('Must have at least one of this item in cart')
+            return
+        } else if (e.target.value > 5) {
+            setQuantityErrors('All items limited to a quantity of 5')
+            return
         }
 
-        cart.forEach(product => {
-            if (product.id === cartItem.id) {
-                product.num_of_product = e.target.value
-                dispatch(updateItemQuantitiy(product, e.target.value))
-            }
-        })
-
-        setQuantityChanged(current => !current)
-        localStorage.setItem('cart', JSON.stringify(cart))
 
     }
 
     const updateInstructions = (e, cartItem) => {
-        let cart = []
 
-        if (localStorage.getItem('cart')) {
-            cart = JSON.parse(localStorage.getItem('cart'))
-        } else {
-            cart = []
-        }
+        if (e.target.value.length < 50) {
+            setInstructionErrors([])
+            let cart = []
 
-        cart.forEach(product => {
-            if (product.id === cartItem.id) {
-                product.instructions = e.target.value
-                dispatch(updateItemInstructions(product, e.target.value))
+            if (localStorage.getItem('cart')) {
+                cart = JSON.parse(localStorage.getItem('cart'))
+            } else {
+                cart = []
             }
-        })
 
-        localStorage.setItem('cart', JSON.stringify(cart))
+            cart.forEach(product => {
+                if (product.id === cartItem.id) {
+                    product.instructions = e.target.value
+                    dispatch(updateItemInstructions(product, e.target.value))
+                }
+            })
+
+            localStorage.setItem('cart', JSON.stringify(cart))
+
+        } else if (e.target.value.length > 50) {
+            setInstructionErrors('Instructions limited to 50 characters')
+            return
+        }
     }
 
     const getProductPrice = (price, quantity) => {
@@ -81,7 +102,7 @@ const Cart = () => {
                 priceArr.push(product.price)
             }
         })
-        console.log('price array', priceArr)
+
         let priceSum = 0
 
         if (priceArr.length > 0) {
@@ -94,6 +115,14 @@ const Cart = () => {
     }
 
     const handleCheckout = async () => {
+        if (quantityErrors.length > 0) {
+            return
+        }
+
+        if (instructionErrors.length > 0) {
+            return
+        }
+
         let cart = []
 
         if (localStorage.getItem('cart')) {
@@ -137,6 +166,8 @@ const Cart = () => {
                                     ${getProductPrice(cartItem.price, cartItem.num_of_product)}
                                 </div>
                                 : <div className='item-price'>${cartItem.price}</div>}
+                            <div>{quantityErrors}</div>
+                            <div>{instructionErrors}</div>
                             <form className='cart-form'>
                                 <input
                                     name='num_of_product'
