@@ -15,6 +15,7 @@ const SearchBar = () => {
             <input
                 className='searchbar-input'
                 id='searchbar-input'
+                value={query}
                 placeholder='Search Products'
                 onChange={(e) => setQuery(e.target.value)}
             />
@@ -28,9 +29,9 @@ const SearchBar = () => {
             })
             .map((product) => (
                 <div key={product.id}>
-                    <Link to={`/products/${product.id}`}>
+                    <a href={`/products/${product.id}`}>
                         <p className='search-product-name'>{product.name}</p>
-                    </Link>
+                    </a>
                 </div>
             ))
             : null}
