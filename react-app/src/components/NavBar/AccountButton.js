@@ -41,24 +41,27 @@ const AccountButton = () => {
                 Account
             </button>
             {showMenu && (
-                <ul>
-                    <li>
-                        <Link to='/login' exact={true} activeClassName='active'>
+                <div className='account-links-menu'>
+                    <div>
+                        <Link to='/login' exact={true} className='auth-buttons' id='login-button'>
                             Login
                         </Link>
-                    </li>
-                    <li>
-                        <Link to='/sign-up' exact={true} activeClassName='active'>
+                    </div>
+                    <br />
+                    <div>
+                        <Link to='/sign-up' exact={true} className='auth-buttons' id='signup-button'>
                             Sign Up
                         </Link>
-                    </li>
-                    <li>
-                        <button onClick={demoLogin}>Demo Login</button>
-                    </li>
-                    <li>
+                    </div>
+                    <br />
+                    <div>
+                        <button onClick={demoLogin} className='demo-login-btn'>Demo Login</button>
+                    </div>
+                    <br />
+                    <div>
                         <LogoutButton />
-                    </li>
-                </ul>
+                    </div>
+                </div>
             )}
         </div>
     )
