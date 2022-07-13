@@ -29,7 +29,9 @@ const Reviews = ({ id, product }) => {
     return (
         <div className='reviews-container'>
             <h2 className='reviews-heading'>Reviews</h2>
-            <button onClick={() => setShowModal(true)} className='add-review-button'>Leave a Review</button>
+            {sessionUser ?
+                <button onClick={() => setShowModal(true)} className='add-review-button'>Leave a Review</button>
+                : null}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <AddReviewForm productId={product?.id} setShowModal={setShowModal} />
@@ -49,12 +51,12 @@ const Reviews = ({ id, product }) => {
                             <button onClick={() => setShowEditModal(true)} className='reviews-buttons'>Edit Review</button>
                             {showEditModal && (
                                 <Modal onClose={() => setShowEditModal(false)}>
-                                    <EditReviewForm review={ review } setShowEditModal={setShowEditModal} />
+                                    <EditReviewForm review={review} setShowEditModal={setShowEditModal} />
                                 </Modal>
                             )}
-                            <DeleteReview review={review} productId={id}/>
+                            <DeleteReview review={review} productId={id} />
                         </div>
-                    ) : null }
+                    ) : null}
                     <br />
                 </div>
             ))}

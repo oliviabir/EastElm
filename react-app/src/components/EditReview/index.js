@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { editReview } from "../../store/reviews";
 
@@ -9,10 +9,28 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
     const [body, setBody] = useState(review.body)
     const [errors, setErrors] = useState([])
 
+    useEffect(() => {
+        const errors = [];
+        if (body.length > 500) {
+            errors.push('Review must be less than 500 characters');
+        } else if (body.length < 0) {
+            errors.push('Review must contain content')
+        }
+        if (rating < 1) {
+            errors.push('Please enter a rating')
+        }
+
+        setErrors(errors);
+    }, [body]);
+
     const ratingArr = [1, 2, 3, 4, 5]
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        if (errors) {
+            return
+        }
 
         const payload = {
             user_id: review.user_id,

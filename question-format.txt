@@ -19,13 +19,12 @@ What are you working on?
 Adding the email_validator package for wtforms to Pipfile/requirements
 
 Describe the problem
-I had to install the email_validator package for wtforms email validation to work and forgot to add to a file for heroku to load it. I haven't had to
-load any additional packages yet so I'm unsure of the process for Heroku, but I think I need the version to add this and I am unable to find the version
+I had to install the email_validator package for wtforms email validation to work and forgot to add to a file for heroku to load it. I think I need the version to add this to the Pipfile and I am unable to find the version
 
 What error messages do you have?
 I am getting an Application Error on Heroku as I pushed without adding the necessary package. In my Heroku logs it says 'app crashed' at= error
 
 What have you done to debug? / What have you searched/tried?
-I've tried searching for the version for the email_validator package as well as how to add this package to Heroku but haven't found anything to this effect
+I've tried searching for the version for the email_validator package as well as looking at the wtforms docs but haven't found anything to this effect
 
 Relevant code snippets/screenshots with explanations

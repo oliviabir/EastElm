@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addReview } from "../../store/reviews";
 import './AddReview.css'
@@ -10,6 +10,20 @@ const AddReviewForm = ({ productId, setShowModal }) => {
     const [rating, setRating] = useState(0)
     const [body, setBody] = useState('')
     const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        const errors = [];
+        if (body.length > 500) {
+            errors.push('Review must be less than 500 characters');
+        }  else if (body.length < 0) {
+            errors.push('Review must contain content')
+        }
+        if (rating < 1) {
+            errors.push('Please enter a rating')
+        }
+
+        setErrors(errors);
+    }, [body, rating]);
 
     const ratingArr = [1, 2, 3, 4, 5]
 
@@ -39,8 +53,9 @@ const AddReviewForm = ({ productId, setShowModal }) => {
                         <li key={idx}>{error}</li>
                     ))}
                 </ul>
+                <div>Fields marked with * are required</div>
                 <label>
-                Rating
+                    Rating*
                     <div>
                         {ratingArr.map((index) => {
                             index += 1
@@ -58,7 +73,7 @@ const AddReviewForm = ({ productId, setShowModal }) => {
                         })}
                     </div>
                 </label>
-                <label>
+                <label>*
                     <input
                         name='body'
                         type='text'
