@@ -27,19 +27,20 @@
 }
 
 .edit-num-input {
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
 }
 
 .confirm-edit-btn {
     background-color: #851023;
     color: white;
     border: none;
-    padding: 3%;
+    padding: 5%;
 }
 
 .edit-instructions-input {
     font-size: 16px;
+    height: 70px;
     margin: 20px 10px 30px 10px;
     resize: none;
 }

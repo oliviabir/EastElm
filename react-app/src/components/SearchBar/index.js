@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
+import './SearchBar.css'
 
 const SearchBar = () => {
     const products = useSelector((state) => {
@@ -10,9 +11,11 @@ const SearchBar = () => {
     const [query, setQuery] = useState('')
 
     return (
-        <div>
+        <div className='searchbar-container'>
             <input
-                placeholder='Search'
+                className='searchbar-input'
+                id='searchbar-input'
+                placeholder='Search Products'
                 onChange={(e) => setQuery(e.target.value)}
             />
             {query
@@ -26,7 +29,7 @@ const SearchBar = () => {
             .map((product) => (
                 <div key={product.id}>
                     <Link to={`/products/${product.id}`}>
-                        <p>{product.name}</p>
+                        <p className='search-product-name'>{product.name}</p>
                     </Link>
                 </div>
             ))
