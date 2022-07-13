@@ -11,9 +11,14 @@ const OrderHistory = () => {
 
     const [orderCanceled, setOrderCanceled] = useState(false)
 
+    const sessionUser = useSelector(state => state.session.user)
+
     const orders = useSelector((state) => {
         return Object.values(state.orders)
     })
+
+    const usersOrders = orders.filter(order => order?.user_id === sessionUser?.id)
+    console.log('USERS ORDER', usersOrders.length)
 
     useEffect(() => {
         dispatch(viewOrders())
@@ -40,14 +45,18 @@ const OrderHistory = () => {
     return (
         <div className='order-history-container'>
             <h2 className='order-history-header'>Order History</h2>
-            {orders?.map((order) => (
-                <div key={order.id}>
-                    <ItemInfo order={order}/>
-                    {pushOrders(order.id)}
-                    <br />
-                </div>
-            ))}
-            <button onClick={handleCancel} className='cancel-order-btn'>Cancel Order</button>
+            {usersOrders.length > 0 ?
+                usersOrders?.map((order) => (
+                    <div>
+                        <div key={order.id}>
+                            <ItemInfo order={order} />
+                            {pushOrders(order.id)}
+                            <br />
+                        </div>
+                        <button onClick={handleCancel} className='cancel-order-btn'>Cancel Order</button>
+                    </div>
+                ))
+                : <h2>You have no orders</h2>}
         </div>
     )
 }
