@@ -9,7 +9,6 @@ import './OrderHistory.css'
 const OrderHistory = () => {
     const dispatch = useDispatch()
 
-    const [showModal, setShowModal] = useState(false)
     const [orderCanceled, setOrderCanceled] = useState(false)
 
     const orders = useSelector((state) => {
@@ -40,17 +39,15 @@ const OrderHistory = () => {
 
     return (
         <div className='order-history-container'>
+            <h2 className='order-history-header'>Order History</h2>
             {orders?.map((order) => (
                 <div key={order.id}>
                     <ItemInfo order={order}/>
-                    <div>Quantity: {order.num_of_product ? order.num_of_product : 1}</div>
-                    <div>Instructions: {order.instructions}</div>
-                    <EditOrder order={order} />
                     {pushOrders(order.id)}
                     <br />
                 </div>
             ))}
-            <button onClick={handleCancel}>Cancel Order</button>
+            <button onClick={handleCancel} className='cancel-order-btn'>Cancel Order</button>
         </div>
     )
 }

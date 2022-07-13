@@ -124,7 +124,7 @@ const Cart = () => {
     return (
         <div className='cart-page'>
             <h2 className='cart-header'>Shopping Cart</h2>
-            {checkoutComplete ? <div>Cart Empty</div> :
+            {checkoutComplete ? <div className='empty-cart-tag'>Cart Empty</div> :
                 cart?.map((cartItem) => (
                     <div key={cartItem.id} className='cart-card-container'>
                         <img src={cartItem.img_one} className='item-img' />

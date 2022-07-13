@@ -8,6 +8,10 @@
     font-weight: 400;
 }
 
+.empty-cart-tag {
+    font-size: 20px;
+}
+
 .cart-card-container {
     margin: 5%;
     display: grid;
