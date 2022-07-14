@@ -32,10 +32,10 @@ export const removeOrder = (id) => async (dispatch) => {
     })
 
     if (response.ok) {
-    dispatch(remove(id));
+        dispatch(remove(id));
+        return response;
     }
 
-    return response;
 }
 
 export const editOrder = (payload, id) => async (dispatch) => {
@@ -62,6 +62,7 @@ const ordersReducer = (state = {}, action) => {
             return {...normalizedOrders}
         case REMOVE_ORDER:
             const deleteState = { ...state }
+            delete deleteState[action.order]
             return deleteState
         case EDIT_ORDER:
             const updatedState = {

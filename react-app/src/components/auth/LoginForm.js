@@ -16,7 +16,6 @@ const LoginForm = () => {
     const data = await dispatch(login(email, password));
     if (data) {
       let errorsArr = []
-      console.log('ERRORS ARRAY', errorsArr)
 
       data.forEach(error => {
         const splitError = error.split(':')
@@ -45,10 +44,10 @@ const LoginForm = () => {
     <form onSubmit={onLogin} className='login-form-container'>
       <div>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div key={ind} className='error-messages'>{error}</div>
         ))}
       </div>
-      <div>Fields marked with * are required</div>
+      <div className='required-message'>Fields marked with * are required</div>
       <div>
         <label htmlFor='email' className='login-input-label'>Email*</label>
         <input

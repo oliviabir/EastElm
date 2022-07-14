@@ -32,7 +32,10 @@ li {
     justify-content: center;
     align-content: center;
     margin-right: 1.5%;
+}
 
+.right-links:hover {
+    cursor: pointer;
 }
 
 #cart-link {
@@ -49,12 +52,20 @@ li {
     font-size: 30px;
 }
 
+.about-links:hover {
+    cursor: pointer;
+}
+
 #account-links-button {
     background-color: #851023;
     color: white;
     border: none;
     padding: 8%;
     margin: 0 50px 0 20px;
+}
+
+#account-links-button:hover {
+    cursor: pointer;
 }
 
 .account-links-menu {
@@ -66,6 +77,10 @@ li {
     padding: 2% 1% 2% 1%;
     right: 0;
     margin-right: 51px;
+}
+
+.auth-buttons:hover {
+    cursor: pointer;
 }
 
 .demo-login-btn {

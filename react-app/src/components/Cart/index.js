@@ -200,7 +200,8 @@ const Cart = () => {
                     </div>
                 ))}
             {totalPrice() > 0 ? <p className='total-price-display'>Total:${totalPrice()}</p> : null}
-            <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button>
+            {cart.length > 0 ? <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button> : null}
+            {/* <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button> */}
         </div>
     )
 }
