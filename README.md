@@ -21,7 +21,7 @@
 1. Clone the main repository
 
    ```bash
-   git clone https://github.com/ukiukica/splitzy.git
+   git clone https://github.com/oliviabir/EastElm
    ```
 
 2. Install the dependencies
@@ -58,7 +58,7 @@
 
 ### Application Architecture
 
-splitzy is built with Flask (backend), React and Redux (frontend), and PostgresSQL (database).
+east-elm is built with Flask (backend), React and Redux (frontend), and PostgresSQL (database).
 
 <br>
 
