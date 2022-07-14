@@ -86,7 +86,7 @@ const AddReviewForm = ({ productId, setShowModal }) => {
                         onChange={(e) => setBody(e.target.value)}
                     />
                 </label>
-                <button type='submit'>Submit</button>
+                <button type='submit' className='add-review-button'>Submit</button>
             </form>
         </div>
     )

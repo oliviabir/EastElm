@@ -80,6 +80,8 @@ const SignUpForm = () => {
         <label>User Name*</label>
         <input
           type='text'
+          className='signup-input-field'
+          id='username-input-field'
           name='username'
           onChange={updateUsername}
           value={username}
@@ -89,6 +91,7 @@ const SignUpForm = () => {
         <label>Email*</label>
         <input
           type='text'
+          className='signup-input-field'
           name='email'
           onChange={updateEmail}
           value={email}
@@ -98,6 +101,7 @@ const SignUpForm = () => {
         <label>Password*</label>
         <input
           type='password'
+          className='signup-input-field'
           name='password'
           onChange={updatePassword}
           value={password}
@@ -107,13 +111,14 @@ const SignUpForm = () => {
         <label>Repeat Password*</label>
         <input
           type='password'
+          className='signup-input-field'
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button type='submit' className='signup-button'>Sign Up</button>
     </form>
   );
 };
