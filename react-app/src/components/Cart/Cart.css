@@ -10,7 +10,9 @@
 }
 
 .empty-cart-tag {
-    font-size: 20px;
+    font-size: 24px;
+    margin-left: 5%;
+    font-weight: 400;
 }
 
 .cart-card-container {
@@ -38,6 +40,11 @@
 
 .item-price {
     margin-bottom: 5%;
+}
+
+.error-messages {
+    color: #a1283c;
+    font-weight: 500;
 }
 
 .instructions-input {

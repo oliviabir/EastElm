@@ -171,9 +171,9 @@ const Cart = () => {
                                     ${getProductPrice(cartItem.price, cartItem.num_of_product)}
                                 </div>
                                 : <div className='item-price'>${cartItem.price}</div>}
-                            {quantityErrorId === cartItem.id ? <div>{quantityErrors}</div> : null}
+                            {quantityErrorId === cartItem.id ? <div className='cart-error-messages'>{quantityErrors}</div> : null}
                             {/* <div>{quantityErrors}</div> */}
-                            {instructionErrorId === cartItem.id ? <div>{instructionErrors}</div> : null}
+                            {instructionErrorId === cartItem.id ? <div className='cart-error-messages'>{instructionErrors}</div> : null}
                             {/* <div>{instructionErrors}</div> */}
                             <form className='cart-form'>
                                 <input
@@ -201,7 +201,6 @@ const Cart = () => {
                 ))}
             {totalPrice() > 0 ? <p className='total-price-display'>Total:${totalPrice()}</p> : null}
             {cart.length > 0 ? <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button> : null}
-            {/* <button onClick={handleCheckout} className='checkout-cart-btn'>Checkout</button> */}
         </div>
     )
 }
