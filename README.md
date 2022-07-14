@@ -1,6 +1,6 @@
 <h1>east-elm</h1>
 
-<p>east-elm is a loose clone of West Elm that provides users the ability to view product offerings by category or search and leave and edit reviews of products. Users also have the ability to add items to their cart, alter the quantity and delivery instructions, checkout their cart and edit delivery instructions in their order history. Users are able to browse the site without a login, but must sign up or log in to access cart capabilities.</p>
+<p>east-elm is an e-commerce app for quality and high-end furniture based off West Elm. east-elm provides users the ability to view product offerings by category or search and leave and edit reviews of products. Users also have the ability to add items to their cart, alter the quantity and delivery instructions, checkout their cart and edit delivery instructions in their order history. Users are able to browse the site without a login, but must sign up or log in to access cart capabilities.</p>
 
 
 **Live Link**: https://east-elm.herokuapp.com/sign-up
