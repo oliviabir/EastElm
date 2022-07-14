@@ -9,13 +9,13 @@ import './SingleProduct.css'
 const SingleProduct = () => {
     const productIdObj = useParams()
     const productId = productIdObj.id
+    const history = useHistory()
 
     if (productId > 32) {
         history.push('/404')
     }
 
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const sessionUser = useSelector(state => state.session.user)
 
