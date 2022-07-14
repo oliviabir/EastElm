@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { login } from '../../store/session';
 import LowerNavBar from '../LowerNavBar';
 import SearchBar from '../SearchBar';
@@ -26,14 +26,23 @@ const NavBar = () => {
         <div className='right-links'>
           {sessionUser ?
             <div>
-                <NavLink to='/orders' exact={true} id='order-history-link'>
-                  Order History
-                </NavLink>
-                <NavLink to='/cart' exact={true} id='cart-link'>
-                  Cart
-                </NavLink>
+              <NavLink to='/orders' exact={true} id='order-history-link'>
+                Order History
+              </NavLink>
+              <NavLink to='/cart' exact={true} id='cart-link'>
+                Cart
+              </NavLink>
             </div>
-            : null}
+            :
+            <div>
+              <Link to={{ pathname: 'https://github.com/oliviabir' }} className='about-links' target='_blank'>
+                <i className='fa-brands fa-github'></i>
+              </Link>
+              <Link to={{ pathname: 'https://www.linkedin.com/in/olivia-bir-74b16b7b?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BhIpATu1WRI2%2FsBi7q7h8Hw%3D%3D' }} className='about-links' target='_blank'>
+                <i className='fa-brands fa-linkedin'></i>
+              </Link>
+            </div>
+          }
           <li>
             <AccountButton />
           </li>
