@@ -19,22 +19,24 @@ const SearchBar = () => {
                 placeholder='Search Products'
                 onChange={(e) => setQuery(e.target.value)}
             />
-            {query
-            ? products.filter((product) => {
-                if (product.name.toLowerCase().includes(query.toLowerCase())) {
-                    return product
-                } else if (product.category.toLowerCase().includes(query.toLowerCase())) {
-                    return product
-                }
-            })
-            .map((product) => (
-                <div key={product.id}>
-                    <a href={`/products/${product.id}`}>
-                        <p className='search-product-name'>{product.name}</p>
-                    </a>
-                </div>
-            ))
-            : null}
+            <div className='search-list'>
+                {query
+                ? products.filter((product) => {
+                    if (product.name.toLowerCase().includes(query.toLowerCase())) {
+                        return product
+                    } else if (product.category.toLowerCase().includes(query.toLowerCase())) {
+                        return product
+                    }
+                })
+                .map((product) => (
+                    <div key={product.id} className='search-items'>
+                        <a href={`/products/${product.id}`}>
+                            <p className='search-product-name'>{product.name}</p>
+                        </a>
+                    </div>
+                ))
+                : null}
+            </div>
         </div>
     )
 }
