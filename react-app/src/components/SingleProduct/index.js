@@ -24,11 +24,11 @@ const SingleProduct = () => {
     const [addedToCart, setAddedToCart] = useState(false)
     const [alreadyInCart, setAlreadyInCart] = useState(false)
 
-    useEffect(() => {
-        if (!product) {
-            history.push('/404')
-        }
-    }, [dispatch])
+    // useEffect(() => {
+    //     if (!product) {
+    //         history.push('/404')
+    //     }
+    // }, [product])
 
 
     useEffect(() => {
