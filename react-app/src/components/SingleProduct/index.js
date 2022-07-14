@@ -10,6 +10,10 @@ const SingleProduct = () => {
     const productIdObj = useParams()
     const productId = productIdObj.id
 
+    if (productId > 32) {
+        history.push('/404')
+    }
+
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -23,12 +27,6 @@ const SingleProduct = () => {
 
     const [addedToCart, setAddedToCart] = useState(false)
     const [alreadyInCart, setAlreadyInCart] = useState(false)
-
-    // useEffect(() => {
-    //     if (!product) {
-    //         history.push('/404')
-    //     }
-    // }, [product])
 
 
     useEffect(() => {
