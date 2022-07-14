@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { viewProducts } from "../../store/products";
 import { addToCart } from "../../store/cart";
 import Reviews from "../Reviews";
@@ -10,7 +10,8 @@ const SingleProduct = () => {
     const productIdObj = useParams()
     const productId = productIdObj.id
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const sessionUser = useSelector(state => state.session.user)
 
@@ -22,6 +23,12 @@ const SingleProduct = () => {
 
     const [addedToCart, setAddedToCart] = useState(false)
     const [alreadyInCart, setAlreadyInCart] = useState(false)
+
+    useEffect(() => {
+        if (!product) {
+            history.push('/404')
+        }
+    }, [dispatch])
 
 
     useEffect(() => {

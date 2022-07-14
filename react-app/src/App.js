@@ -18,6 +18,7 @@ import Chairs from './components/Chairs';
 import Sofas from './components/Sofas';
 import Tables from './components/Tables';
 import Home from './components/Home';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -80,6 +81,9 @@ function App() {
         </Route>
         <Route path='/tables' exact={true} >
           <Tables />
+        </Route>
+        <Route path='/404' exact={true}>
+          <PageNotFound />
         </Route>
       </Switch>
     </BrowserRouter>
