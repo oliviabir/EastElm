@@ -67,3 +67,10 @@ li {
     background-color: white;
     font-size: 16px;
 }
+
+.demo-login-btn:hover {
+    color: #851023;
+    box-shadow: 2px rgb(88, 84, 84);
+    font-weight: 550;
+    cursor: pointer;
+}
