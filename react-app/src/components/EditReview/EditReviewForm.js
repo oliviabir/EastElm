@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { editReview } from "../../store/reviews";
+import './EditReview.css'
 
 const EditReviewForm = ({ review, setShowEditModal }) => {
     const dispatch = useDispatch()
@@ -50,15 +51,15 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <ul>
+                <ul className='errors-list'>
                     {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
+                        <li key={idx} className='error-messages'>{error}</li>
                     ))}
                 </ul>
-                <div>All fields are required</div>
-                <label>
+                <div id='required-message'>All fields are required</div>
+                <label className='rating-container'>
                     Rating
-                    <div>
+                    <div className='rating-button-container'>
                         {ratingArr.map((index) => {
                             index += 1
                             return (
@@ -75,16 +76,19 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
                         })}
                     </div>
                 </label>
-                <label>
-                    <input
-                        name='body'
-                        type='text'
-                        value={body}
-                        placeholder={'Leave a review'}
-                        onChange={(e) => setBody(e.target.value)}
-                    />
-                </label>
-                <button type='submit'>Submit</button>
+                <div className='review-submit-container'>
+                    <label>
+                        <textarea
+                            name='body'
+                            id='add-review-input'
+                            type='text'
+                            value={body}
+                            placeholder={'Leave a review'}
+                            onChange={(e) => setBody(e.target.value)}
+                        />
+                    </label>
+                    <button type='submit' id='add-review-btn'>Submit</button>
+                </div>
             </form>
         </div>
     )

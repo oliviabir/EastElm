@@ -44,7 +44,7 @@ const Reviews = ({ id, product }) => {
                             <span key={index} className={index <= review.rating ? 'on' : 'off'}>&#9733;</span>
                         )
                     })}
-                    <div>{review.body}</div>
+                    <div id='review-body'>{review.body}</div>
                     {(sessionUser?.id == review.user_id) ? (
                         <div>
                             <EditReview review={review} />

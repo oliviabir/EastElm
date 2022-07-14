@@ -3,10 +3,10 @@
     flex-direction: column;
 }
 
-.error-messages {
+.cart-error-messages {
     color: #a1283c;
     font-weight: 500;
-    padding: 1%;
+    padding-bottom: 2px;
 }
 
 #required-message {

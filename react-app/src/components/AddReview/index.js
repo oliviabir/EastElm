@@ -13,7 +13,7 @@ const AddReviewForm = ({ productId, setShowModal }) => {
 
     useEffect(() => {
         const errors = [];
-        if (body.length > 500) {
+        if (body.length > 200) {
             errors.push('Review must be less than 200 characters');
         }  else if (body.length < 1) {
             errors.push('Review must contain content')
@@ -50,17 +50,17 @@ const AddReviewForm = ({ productId, setShowModal }) => {
     }
 
     return (
-        <div>
+        <div className='add-review-container'>
             <form onSubmit={handleSubmit}>
-                <ul>
+                <ul className='errors-list'>
                     {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
+                        <li key={idx} className='error-messages'>{error}</li>
                     ))}
                 </ul>
-                <div>All fields are required</div>
-                <label>
+                <div id='required-message'>All fields are required</div>
+                <label className='rating-container'>
                     Rating
-                    <div>
+                    <div className='rating-button-container'>
                         {ratingArr.map((index) => {
                             index += 1
                             return (
@@ -77,16 +77,19 @@ const AddReviewForm = ({ productId, setShowModal }) => {
                         })}
                     </div>
                 </label>
-                <label>
-                    <input
-                        name='body'
-                        type='text'
-                        value={body}
-                        placeholder={'Leave a review'}
-                        onChange={(e) => setBody(e.target.value)}
-                    />
-                </label>
-                <button type='submit' className='add-review-button'>Submit</button>
+                <div className='review-submit-container'>
+                    <label>
+                        <textarea
+                            name='body'
+                            id='add-review-input'
+                            type='text'
+                            value={body}
+                            placeholder={'Leave a review'}
+                            onChange={(e) => setBody(e.target.value)}
+                        />
+                    </label>
+                    <button type='submit' id='add-review-btn'>Submit</button>
+                </div>
             </form>
         </div>
     )
