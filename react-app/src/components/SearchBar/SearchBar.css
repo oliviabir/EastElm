@@ -3,3 +3,14 @@
     width: 200px;
     font-size: 16px;
 }
+
+.search-list {
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.search-items {
+    padding: 3%;
+    width: 150px;
+}

@@ -59,13 +59,21 @@ li {
 
 .account-links-menu {
     display: grid;
-    /* margin-right: 80px; */
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    /* margin-top: 2%; */
+    padding: 2% 1% 2% 1%;
+    right: 0;
+    margin-right: 51px;
 }
 
 .demo-login-btn {
     border: none;
     background-color: white;
     font-size: 16px;
+    position: relative;
+    right: 6px;
 }
 
 .demo-login-btn:hover {
