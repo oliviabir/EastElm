@@ -72,10 +72,10 @@ const SignUpForm = () => {
     <form onSubmit={onSignUp} className='signup-form-container'>
       <div>
         {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div key={ind} className='error-messages'>{error}</div>
         ))}
       </div>
-      <div>Fields marked with * are required</div>
+      <div className='required-message'>Fields marked with * are required</div>
       <div>
         <label>User Name*</label>
         <input

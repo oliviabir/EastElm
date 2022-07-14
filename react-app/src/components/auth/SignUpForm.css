@@ -10,6 +10,14 @@
     width: 250px;
 }
 
+.error-messages {
+    color: #851023;
+}
+
+.required-message {
+    margin-top: 5%;
+}
+
 .signup-input-field {
     background-color: white;
     height: 20px;

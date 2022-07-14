@@ -18,7 +18,6 @@ const OrderHistory = () => {
     })
 
     const usersOrders = orders.filter(order => order?.user_id === sessionUser?.id)
-    console.log('USERS ORDER', usersOrders.length)
 
     useEffect(() => {
         dispatch(viewOrders())
@@ -45,8 +44,8 @@ const OrderHistory = () => {
     return (
         <div className='order-history-container'>
             <h2 className='order-history-header'>Order History</h2>
-            {usersOrders.length === 0 ?
-                <h2>You have no orders</h2>
+            {usersOrders?.length === 0 ?
+                <h2 className='no-orders-tag'>You have no orders</h2>
                 : usersOrders?.map((order) => (
                     <div>
                         <div key={order.id}>
@@ -57,7 +56,7 @@ const OrderHistory = () => {
                     </div>
                 ))
             }
-            <button onClick={handleCancel} className='cancel-order-btn'>Cancel Order</button>
+            {usersOrders.length > 0 ? <button onClick={handleCancel} className='cancel-order-btn'>Cancel All Orders</button> : null}
         </div>
     )
 }
