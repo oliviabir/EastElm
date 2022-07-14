@@ -16,6 +16,8 @@ const Cart = () => {
     const [quantityChanged, setQuantityChanged] = useState(false)
     const [quantityErrors, setQuantityErrors] = useState([]);
     const [instructionErrors, setInstructionErrors] = useState([])
+    const [quantityErrorId, setQuantityErrorId] = useState(0)
+    const [instructionErrorId, setInstructionErrorId] = useState(0)
 
 
     const updateQuantity = (e, cartItem) => {
@@ -41,9 +43,11 @@ const Cart = () => {
             localStorage.setItem('cart', JSON.stringify(cart))
         } else if (e.target.value < 1) {
             setQuantityErrors('Must have at least one of this item in cart')
+            setQuantityErrorId(cartItem.id)
             return
         } else if (e.target.value > 5) {
             setQuantityErrors('All items limited to a quantity of 5')
+            setQuantityErrorId(cartItem.id)
             return
         }
 
@@ -73,6 +77,7 @@ const Cart = () => {
 
         } else if (e.target.value.length > 50) {
             setInstructionErrors('Instructions limited to 50 characters')
+            setInstructionErrorId(cartItem.id)
             return
         }
     }
@@ -166,8 +171,10 @@ const Cart = () => {
                                     ${getProductPrice(cartItem.price, cartItem.num_of_product)}
                                 </div>
                                 : <div className='item-price'>${cartItem.price}</div>}
-                            <div>{quantityErrors}</div>
-                            <div>{instructionErrors}</div>
+                            {quantityErrorId === cartItem.id ? <div>{quantityErrors}</div> : null}
+                            {/* <div>{quantityErrors}</div> */}
+                            {instructionErrorId === cartItem.id ? <div>{instructionErrors}</div> : null}
+                            {/* <div>{instructionErrors}</div> */}
                             <form className='cart-form'>
                                 <input
                                     name='num_of_product'
