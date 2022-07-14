@@ -44,17 +44,26 @@ const AccountButton = () => {
             </button>
             {showMenu && (
                 <div className='account-links-menu'>
-                    <div>
-                        <Link to='/login' className='auth-buttons' id='login-button'>
-                            Login
-                        </Link>
-                    </div>
-                    <br />
-                    <div>
-                        <Link to='/sign-up' className='auth-buttons' id='signup-button'>
-                            Sign Up
-                        </Link>
-                    </div>
+                    {!sessionUser ?
+                        <div>
+                            <div>
+                                <Link to='/login' className='auth-buttons' id='login-button'>
+                                    Login
+                                </Link>
+                            </div>
+                            <br />
+                            <div>
+                                <Link to='/sign-up' className='auth-buttons' id='signup-button'>
+                                    Sign Up
+                                </Link>
+                            </div>
+                        </div>
+                        :
+                        <div>
+                            <div>User:</div>
+                            <div>{sessionUser.username}</div>
+                        </div>
+                    }
                     <br />
                     {sessionUser?.id === 1 ?
                         null
