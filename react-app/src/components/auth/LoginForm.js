@@ -50,9 +50,11 @@ const LoginForm = () => {
       </div>
       <div>Fields marked with * are required</div>
       <div>
-        <label htmlFor='email'>Email*</label>
+        <label htmlFor='email' className='login-input-label'>Email*</label>
         <input
           name='email'
+          className='login-input-field'
+          id='email-input-field'
           type='text'
           placeholder='Email'
           value={email}
@@ -60,15 +62,16 @@ const LoginForm = () => {
         />
       </div>
       <div>
-        <label htmlFor='password'>Password*</label>
+        <label htmlFor='password' className='login-input-label'>Password*</label>
         <input
           name='password'
+          className='login-input-field'
           type='password'
           placeholder='Password'
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
+        <button type='submit' className='login-button'>Login</button>
       </div>
     </form>
   );
