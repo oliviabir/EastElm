@@ -40,8 +40,6 @@ const SignUpForm = () => {
           errorsArr.push(splitError[1])
         })
 
-        errorsArr.push(['Passwords do not match'])
-
         setErrors(errorsArr)
       }
     }
