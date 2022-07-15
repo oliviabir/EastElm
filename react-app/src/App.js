@@ -64,12 +64,12 @@ function App() {
         <Route path='/products/:id' exact={true} >
           <SingleProduct />
         </Route>
-        <Route path='/cart' exact={true} >
+        <ProtectedRoute path='/cart' exact={true} >
           <Cart />
-        </Route>
-        <Route path='/orders' exact={true} >
+        </ProtectedRoute>
+        <ProtectedRoute path='/orders' exact={true} >
           <OrderHistory />
-        </Route>
+        </ProtectedRoute>
         <Route path='/reviews' exact={true} >
           <Reviews />
         </Route>
