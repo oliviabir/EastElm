@@ -50,7 +50,7 @@ const EditOrderForm = ({ order, setShowModal }) => {
         <form onSubmit={handleSubmit}>
             <ul>
                 {errors.map((error, idx) => (
-                    <li key={idx}>{error}</li>
+                    <li key={idx} className='error-messages'>{error}</li>
                 ))}
             </ul>
             <div className='edit-input-container'>

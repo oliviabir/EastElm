@@ -1,86 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { checkoutCart, removeFromCart } from "../../store/cart";
-import { updateItemQuantitiy, updateItemInstructions } from "../../store/cart";
+import CartInstructions from "../CartInstructions";
 import './Cart.css'
 
 const Cart = () => {
     const dispatch = useDispatch()
 
+    const cartState = useSelector((state) => state.cart)
     const sessionUser = useSelector((state) => state.session.user);
     const cart = JSON.parse(localStorage.getItem('cart'))
 
+    const [showModal, setShowModal] = useState(false)
     const [checkoutComplete, setCheckoutComplete] = useState(false)
     const [itemRemoved, setItemRemoved] = useState(false)
-    const [quantityChanged, setQuantityChanged] = useState(false)
-    const [quantityErrors, setQuantityErrors] = useState([]);
-    const [instructionErrors, setInstructionErrors] = useState([])
-    const [quantityErrorId, setQuantityErrorId] = useState(0)
-    const [instructionErrorId, setInstructionErrorId] = useState(0)
-
-
-    const updateQuantity = (e, cartItem) => {
-
-        if(e.target.value > 0 && e.target.value < 6) {
-            setQuantityErrors([])
-            let cart = []
-
-            if (localStorage.getItem('cart')) {
-                cart = JSON.parse(localStorage.getItem('cart'))
-            } else {
-                cart = []
-            }
-
-            cart.forEach(product => {
-                if (product.id === cartItem.id) {
-                    product.num_of_product = e.target.value
-                    dispatch(updateItemQuantitiy(product, e.target.value))
-                }
-            })
-
-            setQuantityChanged(current => !current)
-            localStorage.setItem('cart', JSON.stringify(cart))
-        } else if (e.target.value < 1) {
-            setQuantityErrors('Must have at least one of this item in cart')
-            setQuantityErrorId(cartItem.id)
-            return
-        } else if (e.target.value > 5) {
-            setQuantityErrors('All items limited to a quantity of 5')
-            setQuantityErrorId(cartItem.id)
-            return
-        }
-
-
-    }
-
-    const updateInstructions = (e, cartItem) => {
-
-        if (e.target.value.length < 50) {
-            setInstructionErrors([])
-            let cart = []
-
-            if (localStorage.getItem('cart')) {
-                cart = JSON.parse(localStorage.getItem('cart'))
-            } else {
-                cart = []
-            }
-
-            cart.forEach(product => {
-                if (product.id === cartItem.id) {
-                    product.instructions = e.target.value
-                    dispatch(updateItemInstructions(product, e.target.value))
-                }
-            })
-
-            localStorage.setItem('cart', JSON.stringify(cart))
-
-        } else if (e.target.value.length > 50) {
-            setInstructionErrors('Instructions limited to 50 characters')
-            setInstructionErrorId(cartItem.id)
-            return
-        }
-    }
 
     const getProductPrice = (price, quantity) => {
         const productPrice = price * quantity
@@ -120,14 +53,6 @@ const Cart = () => {
     }
 
     const handleCheckout = async () => {
-        if (quantityErrors.length > 0) {
-            return
-        }
-
-        if (instructionErrors.length > 0) {
-            return
-        }
-
         let cart = []
 
         if (localStorage.getItem('cart')) {
@@ -171,30 +96,9 @@ const Cart = () => {
                                     ${getProductPrice(cartItem.price, cartItem.num_of_product)}
                                 </div>
                                 : <div className='item-price'>${cartItem.price}</div>}
-                            {quantityErrorId === cartItem.id ? <div className='cart-error-messages'>{quantityErrors}</div> : null}
-                            {/* <div>{quantityErrors}</div> */}
-                            {instructionErrorId === cartItem.id ? <div className='cart-error-messages'>{instructionErrors}</div> : null}
-                            {/* <div>{instructionErrors}</div> */}
-                            <form className='cart-form'>
-                                <input
-                                    name='num_of_product'
-                                    type='number'
-                                    min='1'
-                                    max='5'
-                                    defaultValue={cartItem.num_of_product ? cartItem.num_of_product : 1}
-                                    className='quantity-input'
-                                    onChange={(e) => updateQuantity(e, cartItem)}
-                                    placeholder={cartItem.num_of_product}
-                                />
-                                <input
-                                    name='instructions'
-                                    type='text'
-                                    defaultValue={cartItem.instructions}
-                                    className='instructions-input'
-                                    onChange={(e) => updateInstructions(e, cartItem)}
-                                    placeholder={'Delivery Instructions'}
-                                />
-                            </form>
+                            <CartInstructions cartItem={cartItem} />
+                            <div>Quantity:{cartItem.num_of_product ? cartItem.num_of_product : 1}</div>
+                            <div>Delivery Instructions:{' '}{cartItem.instructions}</div>
                             <button onClick={() => cartRemoval(cartItem)} className='remove-item-btn'>Remove Item</button>
                         </div>
                     </div>
