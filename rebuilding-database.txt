@@ -10,5 +10,3 @@ to rebuild a database with sqlalchemy:
 
 to only drop the data from the databse:
 - run: flask undo all
-
-test

@@ -17,7 +17,7 @@ const SignUpForm = () => {
     e.preventDefault();
 
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password, repeatPassword));
       if (data) {
         let errorsArr = []
 
@@ -31,7 +31,7 @@ const SignUpForm = () => {
         <Redirect to='/' />
       }
     } else {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password, repeatPassword));
       if (data) {
         let errorsArr = []
 
@@ -41,6 +41,8 @@ const SignUpForm = () => {
         })
 
         setErrors(errorsArr)
+      } else {
+        <Redirect to='/' />
       }
     }
 
@@ -69,7 +71,7 @@ const SignUpForm = () => {
   return (
     <form onSubmit={onSignUp} className='signup-form-container'>
       <div>
-        {errors.map((error, ind) => (
+        {errors?.map((error, ind) => (
           <div key={ind} className='error-messages'>{error}</div>
         ))}
       </div>

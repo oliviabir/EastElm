@@ -29,4 +29,18 @@ I've tried searching for the version for the email_validator package as well as 
 
 Relevant code snippets/screenshots with explanations
 
-Hey Whit! Was hoping to clarify that I properly addressed one of the issues you mentioned on my scorecard. Overall everything was very straightforward but concerning "For this landing page, there is no explanation/welcome message that explains what this app is. This can easily be put below the nav bar/links." I was wondering if this is satisfactory?
+Branch: reviews
+
+What are you working on? (give us some context)
+In testing sign-up again I noticed that it will go through with the signup even with the repeated password not matching the original. I attempted to use the EqualTo validator built in to wtforms and I thought it was working, but when testing again it now blocks all signup even with repeated password filled in.
+
+Describe the problem (what are you trying to do? what is it currently doing?)
+While trying to figure out what the issue is I moved the EqualTo validator to 'repeat_password' and added a dataRequired validator. Once I added that I realized the issue is that the info in that input field is not being captured although I changed nothing about that from the starter. I haven't seen any differences between that field and the others.
+
+What error messages do you have? (screenshot or copy)
+No console error messages. I tried console logging in the handleSubmit but it just confirms that the repeat_password field is not being captured at all. I haven't changed anything related to the input itself from the starter we were given.
+
+What have you done to debug? / What have you searched/tried?
+I've gone through each page in vscode that data would hit, ensured I added repeat_password to the thunk in the store so that info is being sent back, but it's not even capturing it in front-end error handling. I've tried googling but I'm not seeing anything relevant now but I'm going to continue with that and console logging.
+
+Relevant code snippets/screenshots with explanations (crop, mark-up, or explain them)
