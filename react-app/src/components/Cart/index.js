@@ -97,8 +97,8 @@ const Cart = () => {
                                 </div>
                                 : <div className='item-price'>${cartItem.price}</div>}
                             <CartInstructions cartItem={cartItem} />
-                            <div>Quantity:{cartItem.num_of_product ? cartItem.num_of_product : 1}</div>
-                            <div>Delivery Instructions:{' '}{cartItem.instructions}</div>
+                            <div>Quantity: {cartItem.num_of_product ? cartItem.num_of_product : 1}</div>
+                            <div>Delivery Instructions: {cartItem.instructions}</div>
                             <button onClick={() => cartRemoval(cartItem)} className='remove-item-btn'>Remove Item</button>
                         </div>
                     </div>
