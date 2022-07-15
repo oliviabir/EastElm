@@ -28,3 +28,5 @@ What have you done to debug? / What have you searched/tried?
 I've tried searching for the version for the email_validator package as well as looking at the wtforms docs but haven't found anything to this effect
 
 Relevant code snippets/screenshots with explanations
+
+Hey Whit! Was hoping to clarify that I properly addressed one of the issues you mentioned on my scorecard. Overall everything was very straightforward but concerning "For this landing page, there is no explanation/welcome message that explains what this app is. This can easily be put below the nav bar/links." I was wondering if this is satisfactory?

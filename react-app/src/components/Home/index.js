@@ -8,6 +8,8 @@ const Home = () => {
         return Object.values(state.products)
     })
 
+    const sessionUser = useSelector((state) => state.session.user)
+
     const tables = products?.filter(product => product.category === 'tables')
     const sofas = products?.filter(product => product.category === 'sofas')
     const chairs = products?.filter(product => product.category === 'chairs')
@@ -18,7 +20,8 @@ const Home = () => {
             <div className='welcome-message-container'>
                 <h2 className='welcome-heading'>Welcome to east-elm</h2>
                 <p className='welcome-message'>A loose West Elm clone and home to high-end and unique furniture</p>
-                <p className='welcome-message' id='line-two'>Feel free to browse, or click the account button to log in</p>
+                {sessionUser ? <p className='welcome-message' id='line-two'>Enjoy shopping {sessionUser.username}!</p> :
+                <p className='welcome-message' id='line-two'>Feel free to browse, or click the account button to log in</p>}
             </div>
             <p className='link-heading'>Categories</p>
             <div className='category-links'>
