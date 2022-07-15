@@ -1,8 +1,7 @@
 
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink, Link } from 'react-router-dom';
-import { login } from '../../store/session';
 import LowerNavBar from '../LowerNavBar';
 import SearchBar from '../SearchBar';
 import AccountButton from './AccountButton';

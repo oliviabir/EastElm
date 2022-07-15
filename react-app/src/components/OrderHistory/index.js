@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Modal } from '../../context/Modal';
 import { viewOrders, removeOrder } from "../../store/orders"
 import ItemInfo from "./ItemInfo"
-import EditOrder from "../EditOrder"
 import './OrderHistory.css'
 
 const OrderHistory = () => {

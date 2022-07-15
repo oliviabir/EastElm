@@ -36,7 +36,7 @@ export const removeReview = (id) => async (dispatch) => {
     const response = await fetch(`/api/reviews/${id}`, {
         method: 'DELETE'
     })
-    console.log('RESPONSE', response)
+
     if (response.ok) {
         dispatch(remove(id));
         return response
