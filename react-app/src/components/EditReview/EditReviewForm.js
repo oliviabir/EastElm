@@ -12,7 +12,7 @@ const EditReviewForm = ({ review, setShowEditModal }) => {
 
     useEffect(() => {
         const errors = [];
-        if (body.length > 500) {
+        if (body.length > 200) {
             errors.push('Review must be less than 200 characters');
         } else if (body.length < 1) {
             errors.push('Review must contain content')
