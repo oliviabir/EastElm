@@ -26,7 +26,7 @@ def seed_reviews():
     review_12 = Review(
         user_id='1', product_id='12', rating='1', body='Got the tan leather one and it\’s so beautiful but so slippery.. I feel like I am sliding down when I sit on it.', created_at= '2022-07-06', updated_at= '2022-07-06')
     review_13 = Review(
-        user_id='1', product_id='15', rating='4', body='Elevates space and looks elegant but not boring. If you want something stylish without sacrificing comfort then it\’s the chair for you!', created_at= '2022-07-06', updated_at= '2022-07-06')
+        user_id='1', product_id='15', rating='4', body='Elevates space and looks elegant but not boring. If you want something stylish without sacrificing comfort then its the chair for you!', created_at= '2022-07-06', updated_at= '2022-07-06')
     review_14 = Review(
         user_id='2', product_id='12', rating='2', body='The sofa looks incredible however, I find it to be way too soft. The lack of support is very uncomfortable and the fabric is always wrinkled after even a brief sit, making it look old and broken.', created_at= '2022-07-06', updated_at= '2022-07-06')
     review_15 = Review(

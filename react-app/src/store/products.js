@@ -6,7 +6,7 @@ const view = (products) => ({
 });
 
 export const viewProducts = () => async (dispatch) => {
-    const response = await fetch('/api/products')
+    const response = await fetch('/api/products/')
 
     if (response.ok) {
         const products = await response.json()
